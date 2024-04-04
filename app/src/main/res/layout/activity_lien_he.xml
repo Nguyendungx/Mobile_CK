@@ -58,7 +58,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:layout_marginStart="20dp"
-                            android:text="Tên: Nguyễn Hữu Linh"
+                            android:text="Tên: Nguyễn Hùng Dũng"
                             android:textColor="#111"
                             android:textSize="20dp"
                             android:textStyle="bold" />
@@ -83,7 +83,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:layout_marginStart="20dp"
-                            android:text="0969601767"
+                            android:text="0916149123"
                             android:textColor="#111"
                             android:textSize="20dp"
                             android:textStyle="bold" />
@@ -107,7 +107,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:layout_marginStart="5dp"
-                            android:text="nguyenlinh07082001bn@gmail.com"
+                            android:text="nguyendung0916149123@gmail.com"
                             android:textColor="#111"
                             android:textSize="16dp"
                             android:textStyle="bold" />

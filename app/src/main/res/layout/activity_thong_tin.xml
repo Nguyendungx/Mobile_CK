@@ -27,7 +27,7 @@
             android:textSize="23dp"
             android:textColor="#111"
             android:textStyle="bold"
-            android:text="Địa chỉ : P. Tạ Quang Bửu, Bách Khoa, Hai Bà Trưng, Hà Nội"
+            android:text="Địa chỉ : Số 1,Võ Văn Ngân,P.Linh Chiểu, Tp.Thủ Đức"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     </RelativeLayout>

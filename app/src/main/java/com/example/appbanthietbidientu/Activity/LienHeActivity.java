@@ -80,7 +80,7 @@ public class LienHeActivity extends BaseFunctionActivity {
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setAction(Intent.ACTION_CALL);
-                intent.setData(Uri.parse("tel:0969601767"));
+                intent.setData(Uri.parse("tel:0916149123"));
                 startActivity(intent);
             }
         });
@@ -90,7 +90,7 @@ public class LienHeActivity extends BaseFunctionActivity {
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setAction(Intent.ACTION_SENDTO);
-                intent.setData(Uri.parse("sms:0969601767"));
+                intent.setData(Uri.parse("sms:0916149123"));
                 startActivity(intent);
             }
         });

@@ -73,13 +73,13 @@ public class ThongTinActivity extends FragmentActivity implements OnMapReadyCall
         mMap.getUiSettings().setZoomControlsEnabled(true);
 
         // Add a marker in Sydney and move the camera
-        LatLng bachKhoaHaNoi = new LatLng(21.005295366895293, 105.84464544417465);
-        mMap.addMarker(new MarkerOptions().position(bachKhoaHaNoi).title("Bách Khoa Hà Nội")
-                .snippet("P. Tạ Quang Bửu, Bách Khoa, Hai Bà Trưng, Hà Nội, Việt Nam")
+        LatLng diaChiShop = new LatLng(10.8506377,106.7693382);
+        mMap.addMarker(new MarkerOptions().position(diaChiShop).title("Đại Học SPKT")
+                .snippet("Số 1,Võ Văn Ngân,P.Linh Chiểu, Tp.Thủ Đức")
                 .icon(BitmapDescriptorFactory.defaultMarker()));
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         CameraPosition cameraPosition=new CameraPosition.Builder()
-                .target(bachKhoaHaNoi)
+                .target(diaChiShop)
                 .zoom(17)
                 .build();
         mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
