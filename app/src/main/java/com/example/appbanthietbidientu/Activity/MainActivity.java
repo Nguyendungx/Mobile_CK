@@ -124,6 +124,10 @@ public class MainActivity extends AppCompatActivity{
                         Intent thongtin=new Intent(MainActivity.this,ThongTinActivity.class);
                         startActivity(thongtin);
                         break;
+                    case 5:
+                        Intent live = new Intent(MainActivity.this, JoinActivity.class);
+                        startActivity(live);
+                        break;
                 }
             }
         });
@@ -220,7 +224,8 @@ public class MainActivity extends AppCompatActivity{
         loaispArrayList.add(1,new Loaisp(0,"Điện Thoại",R.drawable.ic_action_phone));
         loaispArrayList.add(2,new Loaisp(0,"Laptop",R.drawable.ic_action_laptop));
         loaispArrayList.add(3,new Loaisp(0,"Liên Hệ",R.drawable.ic_action_contact));
-        loaispArrayList.add(4,new Loaisp(0,"Thông Tin",R.drawable.ic_action_infor));
+        loaispArrayList.add(4,new Loaisp(0,"Thông Tin", R.drawable.ic_action_infor));
+        loaispArrayList.add(5,new Loaisp(0,"Livestream",R.drawable.live));
 
         LoaispAdapter loaispAdapter=new LoaispAdapter(loaispArrayList,MainActivity.this);
         listManHinhChinh.setAdapter(loaispAdapter);
