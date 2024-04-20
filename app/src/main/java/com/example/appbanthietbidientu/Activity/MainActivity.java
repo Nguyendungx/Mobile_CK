@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity{
 
     private void GetDuLieusp() {
         loadMain.setVisibility(View.VISIBLE);
-        ApiSp.apiDevice.getListsp("media", "04505275-acd8-47cb-9bdb-5885d1fbaeff").enqueue(new Callback<List<Sanpham>>() {
+        ApiSp.apiDevice.getListsp().enqueue(new Callback<List<Sanpham>>() {
             @Override
             public void onResponse(Call<List<Sanpham>> call, Response<List<Sanpham>> response) {
                 sanphamArrayList= (ArrayList<Sanpham>) response.body();
@@ -221,6 +221,7 @@ public class MainActivity extends AppCompatActivity{
         loaispArrayList.add(2,new Loaisp(0,"Laptop",R.drawable.ic_action_laptop));
         loaispArrayList.add(3,new Loaisp(0,"Liên Hệ",R.drawable.ic_action_contact));
         loaispArrayList.add(4,new Loaisp(0,"Thông Tin",R.drawable.ic_action_infor));
+        loaispArrayList.add(5,new Loaisp(0,"Quản lý doanh thu",R.drawable.ic_action_infor));
 
         LoaispAdapter loaispAdapter=new LoaispAdapter(loaispArrayList,MainActivity.this);
         listManHinhChinh.setAdapter(loaispAdapter);
