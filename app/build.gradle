@@ -59,4 +59,5 @@ dependencies {
     //livestream
     implementation 'live.videosdk:rtc-android-sdk:0.1.21'
     implementation 'com.amitshekhar.android:android-networking:1.0.2'
+    implementation 'com.google.android.exoplayer:exoplayer:2.18.5'
 }

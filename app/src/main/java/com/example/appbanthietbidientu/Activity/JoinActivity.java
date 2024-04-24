@@ -33,6 +33,8 @@ public class JoinActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+//        Test for user or admin access
         setContentView(R.layout.activity_join);
 
         final Button btnCreate = findViewById(R.id.btnCreateMeeting);
