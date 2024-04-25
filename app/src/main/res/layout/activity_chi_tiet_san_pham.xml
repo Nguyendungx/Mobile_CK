@@ -71,6 +71,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         app:cardCornerRadius="10dp">
+
                         <TextView
                             android:id="@+id/ThemGioHangChiTietSanPham"
                             android:layout_width="match_parent"
@@ -119,7 +120,43 @@ Lưu ý rằng, đừng bao giờ khen, tâng bốc doanh nghiệp mình là s�
                         app:trimLength="500"
                         app:colorClickableText="#FFC107"
                         />
+                <TextView
+                    android:textSize="30dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:textStyle="bold"
+                    android:textColor="#03A9F4"
+                    android:text="Bình luận"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <EditText
+                    android:id="@+id/editTextComment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Nhập bình luận của bạn..."
+                    android:layout_margin="10dp"
+                    android:padding="10dp"/>
+
+                <Button
+                    android:id="@+id/buttonSendComment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Gửi"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewComments"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/item_border"
+                />
+
             </LinearLayout>
+
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </LinearLayout>

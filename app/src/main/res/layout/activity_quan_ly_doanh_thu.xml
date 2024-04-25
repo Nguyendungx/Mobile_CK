@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- Revenue per product -->
+    <TextView
+        android:id="@+id/textViewProductRevenue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Doanh thu từng sản phẩm"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:padding="10dp"/>
+
+    <!-- RecyclerView for displaying product revenue -->
+    <!-- RecyclerView for displaying product revenue horizontally -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewProductRevenue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:orientation="horizontal" />
+    <!-- Revenue per month -->
+    <TextView
+        android:id="@+id/textViewMonthlyRevenue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Doanh thu theo tháng"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:padding="10dp"/>
+
+    <!-- RecyclerView for displaying monthly revenue -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewMonthlyRevenue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"/>
+
+    <!-- Revenue per year -->
+    <TextView
+        android:id="@+id/textViewYearlyRevenue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Doanh thu theo năm"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:padding="10dp"/>
+
+    <!-- RecyclerView for displaying yearly revenue -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewYearlyRevenue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"/>
+
+</LinearLayout>

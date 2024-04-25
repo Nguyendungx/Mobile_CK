@@ -9,9 +9,9 @@
               <option name="connection">
                 <ConnectionSetting>
                   <option name="appId" value="com.example.appbanthietbidientu" />
-                  <option name="mobileSdkAppId" value="1:759400115989:android:486c1ade7b30213b4d031c" />
-                  <option name="projectId" value="appthietbidientu" />
-                  <option name="projectNumber" value="759400115989" />
+                  <option name="mobileSdkAppId" value="1:500052509904:android:7700ae2dc6f5e4c3fccad5" />
+                  <option name="projectId" value="empyrean-depth-408513" />
+                  <option name="projectNumber" value="500052509904" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

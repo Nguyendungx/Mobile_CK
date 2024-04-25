@@ -1,5 +1,6 @@
 package com.example.appbanthietbidientu.ultil;
 
+import com.example.appbanthietbidientu.model.Comment;
 import com.example.appbanthietbidientu.model.Sanpham;
 import com.example.appbanthietbidientu.response.SignInResponse;
 import com.google.gson.Gson;
@@ -11,10 +12,12 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ApiSp {
@@ -25,7 +28,7 @@ public interface ApiSp {
     //https://firebasestorage.googleapis.com/v0/b/realtime-64f58.appspot.com/o/laptop.json?alt=media&token=4452ff5b-1980-4626-b646-5fa4c03159d0
 
     ApiSp apiDevice = new Retrofit.Builder()
-            .baseUrl("https://firebasestorage.googleapis.com/v0/b/realtime-64f58.appspot.com/o/")
+            .baseUrl("https://empyrean-depth-408513-default-rtdb.asia-southeast1.firebasedatabase.app/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(ApiSp.class);
@@ -41,17 +44,23 @@ public interface ApiSp {
                                          @Part(Const.KEY_PASSWORD) RequestBody password);
 
     @GET("sanphammoinhat.json")
-    Call<List<Sanpham>> getListsp(@Query("alt") String alt, @Query("token") String token);
+    Call<List<Sanpham>> getListsp();
+    @GET("comment.json")
+    Call<List<Comment>> getlistComment();
+
 
     @GET("dienthoai.json")
-    Call<List<Sanpham>> getlistDienThoai(@Query("alt") String alt, @Query("token") String token);
+    Call<List<Sanpham>> getlistDienThoai();
 
     @GET("laptop.json")
-    Call<List<Sanpham>> getlistLapTop(@Query("alt") String alt, @Query("token") String token);
+    Call<List<Sanpham>> getlistLapTop();
 
     @Multipart
     @POST("thongtinkhachhang.php")
     Call<SignInResponse> getThongTinKhachHang(@Part(Const.KEY_USERNAME) RequestBody tenkhachhang,
                                           @Part(Const.KEY_SDT) RequestBody sodienthoai,
                                           @Part(Const.KEY_EMAIL) RequestBody email);
+
+    @POST("comment.json")
+    Call<Void> postComment(@Body Comment newComment);
 }
