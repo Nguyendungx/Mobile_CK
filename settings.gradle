@@ -11,6 +11,9 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven {url ("https://jcenter.bintray.com")}
+
+//        livestream repo
+        maven { url "https://maven.aliyun.com/repository/jcenter" }
     }
 }
 rootProject.name = "AppBanThietBiDienTu"
