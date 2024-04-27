@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import java.io.Serializable;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -55,22 +56,45 @@ public class LaptopActivity extends BaseFunctionActivity {
 
     private void getData() {
         loadLapTop.setVisibility(View.VISIBLE);
-        ApiSp.apiDevice.getlistLapTop().enqueue(new Callback<List<Sanpham>>() {
+        ApiSp.apiDevice.getListsp().enqueue(new Callback<List<Sanpham>>() {
             @Override
             public void onResponse(Call<List<Sanpham>> call, Response<List<Sanpham>> response) {
-                laptopArrayList= (ArrayList<Sanpham>) response.body();
-                laptopAdapter=new SanphamAdapter(laptopArrayList,getApplicationContext());
-                listViewLapTop.setAdapter(laptopAdapter);
+                if (response.isSuccessful()) {
+                    List<Sanpham> allProducts = response.body();
+                    if (allProducts != null) {
+                        // Lọc sản phẩm có idsanpham="2"
+                        List<Sanpham> filteredProducts = new ArrayList<>();
+                        for (Sanpham sanpham : allProducts) {
+                            if (sanpham.getIdsanpham() == 2) {
+                                filteredProducts.add(sanpham);
+                            }
+                        }
+                        // Đưa tất cả sản phẩm vào laptopArrayList
+                        laptopArrayList.addAll(filteredProducts);
+                        // Hiển thị danh sách sản phẩm đã lọc
+                        laptopAdapter = new SanphamAdapter(laptopArrayList, getApplicationContext());
+                        listViewLapTop.setAdapter(laptopAdapter);
+                    } else {
+                        // Xử lý khi không nhận được danh sách sản phẩm
+                        Toast.makeText(getApplicationContext(), "Không có sản phẩm", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    // Xử lý khi request không thành công
+                    Toast.makeText(getApplicationContext(), "Lỗi khi tải dữ liệu", Toast.LENGTH_SHORT).show();
+                }
                 loadLapTop.setVisibility(View.INVISIBLE);
             }
 
             @Override
             public void onFailure(Call<List<Sanpham>> call, Throwable t) {
-                Toast.makeText(getApplicationContext(),"Error",Toast.LENGTH_SHORT).show();
+                // Xử lý khi có lỗi xảy ra
+                Toast.makeText(getApplicationContext(), "Lỗi kết nối", Toast.LENGTH_SHORT).show();
                 loadLapTop.setVisibility(View.INVISIBLE);
             }
         });
     }
+
+
 
     private void ActionBar() {
         setSupportActionBar(toolbarLapTop);

@@ -71,22 +71,45 @@ public class DienThoaiActivity extends BaseFunctionActivity {
 
     private void getData() {
         loadDienThoai.setVisibility(View.VISIBLE);
-        ApiSp.apiDevice.getlistDienThoai().enqueue(new Callback<List<Sanpham>>() {
+        ApiSp.apiDevice.getListsp().enqueue(new Callback<List<Sanpham>>() {
             @Override
             public void onResponse(Call<List<Sanpham>> call, Response<List<Sanpham>> response) {
-                dienThoaiArrayList= (ArrayList<Sanpham>) response.body();
-                dienThoaiAdapter=new SanphamAdapter(dienThoaiArrayList,getApplicationContext());
-                listViewDienThoai.setAdapter(dienThoaiAdapter);
+                if (response.isSuccessful()) {
+                    List<Sanpham> allProducts = response.body();
+                    if (allProducts != null) {
+                            // Lọc sản phẩm có idsanpham="1"
+                        List<Sanpham> filteredProducts = new ArrayList<>();
+                        for (Sanpham sanpham : allProducts) {
+                            if (sanpham.getIdsanpham()==1) { // Chuyển đổi thành số nguyên để so sánh
+                                filteredProducts.add(sanpham);
+                            }
+                        }
+                        // Đưa tất cả sản phẩm vào laptopArrayList
+                        dienThoaiArrayList.addAll(filteredProducts);
+
+                        // Hiển thị danh sách sản phẩm đã lọc
+                        dienThoaiAdapter = new SanphamAdapter(filteredProducts, getApplicationContext());
+                        listViewDienThoai.setAdapter(dienThoaiAdapter);
+                    } else {
+                        // Xử lý khi không nhận được danh sách sản phẩm
+                        Toast.makeText(getApplicationContext(), "Không có sản phẩm", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    // Xử lý khi request không thành công
+                    Toast.makeText(getApplicationContext(), "Lỗi khi tải dữ liệu", Toast.LENGTH_SHORT).show();
+                }
                 loadDienThoai.setVisibility(View.INVISIBLE);
             }
 
             @Override
             public void onFailure(Call<List<Sanpham>> call, Throwable t) {
-                Toast.makeText(getApplicationContext(),"Error",Toast.LENGTH_SHORT).show();
+                // Xử lý khi có lỗi xảy ra
+                Toast.makeText(getApplicationContext(), "Lỗi kết nối", Toast.LENGTH_SHORT).show();
                 loadDienThoai.setVisibility(View.INVISIBLE);
             }
         });
     }
+
 
 //    private void LoadmoreData() {
 //        listViewDienThoai.setOnScrollListener(new AbsListView.OnScrollListener() {

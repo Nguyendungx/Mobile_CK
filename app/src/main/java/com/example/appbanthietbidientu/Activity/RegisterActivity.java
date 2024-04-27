@@ -1,87 +1,78 @@
 package com.example.appbanthietbidientu.Activity;
 
-import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Patterns;
+import android.text.TextUtils;
 import android.view.View;
-import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.appbanthietbidientu.R;
-import com.example.appbanthietbidientu.response.SignInResponse;
-import com.example.appbanthietbidientu.ultil.ApiSp;
-
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class RegisterActivity extends AppCompatActivity {
-    TextView register;
-    EditText account, password, passwordRepeat;
+    private EditText emailedit, passedit, nameedit;
+    private Button btn_signup;
+    private FirebaseAuth mAuth;
 
-    @SuppressLint("MissingInflatedId")
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        mAuth=FirebaseAuth.getInstance();
+        emailedit = findViewById(R.id.email);
+        passedit = findViewById(R.id.password);
+        nameedit = findViewById(R.id.name);
+        btn_signup = findViewById(R.id.btn_signup);
 
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
-        register = findViewById(R.id.register);
-        account = findViewById(R.id.textAccountRegister);
-        password = findViewById(R.id.textPasswordRegister);
-        passwordRepeat = findViewById(R.id.textRepeatPassword);
 
-        register.setOnClickListener(new View.OnClickListener() {
+        btn_signup.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                String strAccount = account.getText().toString();
-                String strPassword = password.getText().toString();
-                String strPasswordRepeat = passwordRepeat.getText().toString();
+            public void onClick(View v) {
+                register();
+            }
+        });
+    }
 
-                if (strAccount.isEmpty() || strPassword.isEmpty() || strPasswordRepeat.isEmpty()) {
-                    Toast.makeText(RegisterActivity.this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
-                } else if (!Patterns.EMAIL_ADDRESS.matcher(strAccount).matches()) {
-                    Toast.makeText(RegisterActivity.this, "Vui lòng nhập lại Email", Toast.LENGTH_SHORT).show();
-                } else if (strPassword.length() < 6) {
-                    Toast.makeText(RegisterActivity.this, "Mật khẩu phải có ít nhất 6 kí tự", Toast.LENGTH_SHORT).show();
-                } else if (!strPassword.equals(strPasswordRepeat)) {
-                    Toast.makeText(RegisterActivity.this, "Mật khẩu nhập lại không đúng", Toast.LENGTH_SHORT).show();
-                } else {
-                    RequestBody requestBodyEmail = RequestBody.create(MediaType.parse("multipart/form-data"), strAccount);
-                    RequestBody requestBodyPassword = RequestBody.create(MediaType.parse("multipart/form-data"), strPassword);
-
-                    ApiSp.apiDevice.confirmRegister(requestBodyEmail, requestBodyPassword)
-                            .enqueue(new Callback<SignInResponse>() {
-                                @Override
-                                public void onResponse(Call<SignInResponse> call, Response<SignInResponse> response) {
-                                    if (response.body() != null) {
-                                        switch (response.body().statusCode) {
-                                            case 200:
-                                                Toast.makeText(getApplicationContext(), "Đăng kí tài khoản thành công", Toast.LENGTH_SHORT).show();
-                                                onBackPressed();
-                                                break;
-                                            case 400:
-                                                Toast.makeText(getApplicationContext(), "Tài khoản đã tồn tại", Toast.LENGTH_SHORT).show();
-                                                onBackPressed();
-                                                break;
-                                        }
-                                    }
-                                }
-
-                                @Override
-                                public void onFailure(Call<SignInResponse> call, Throwable t) {
-                                    Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_SHORT).show();
-                                }
-                            });
+    private void register() {
+        String email, pass, name;
+        email=emailedit.getText().toString();
+        pass=passedit.getText().toString();
+        name=nameedit.getText().toString();
+        if(TextUtils.isEmpty(email)){
+            Toast.makeText(this, "Vui lòng nhập email!!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(TextUtils.isEmpty(pass)){
+            Toast.makeText(this, "Vui lòng nhập pass!!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(TextUtils.isEmpty(name)){
+            Toast.makeText(this, "Vui lòng nhập tên!!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        mAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    Toast.makeText(getApplicationContext(), "Tạo tài khoản thành công", Toast.LENGTH_SHORT).show();
+                    Intent intent= new Intent(RegisterActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Tạo tài khoản thất bại", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
     }
 }

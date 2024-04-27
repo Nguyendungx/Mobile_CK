@@ -9,5 +9,12 @@
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#B3B3B3</color>
     <color name="background">#111</color>
-    //#0b162a
+    <color name="green_bold">#008299</color>
+    <color name="green_button1">#79CADC</color>
+    <color name="green_bg">#B9F3FC</color>
+    <color name="green_medium">#91D8E4</color>
+    <color name="green_button2">#ECFBFE</color>
+    <color name="pink_bold">#DE8073</color>
+    <color name="gray">#E0E6EB</color>
+    <color name="gray_text">#626E77</color>
 </resources>
