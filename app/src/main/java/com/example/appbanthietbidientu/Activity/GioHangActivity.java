@@ -21,6 +21,7 @@ import androidx.core.content.res.ResourcesCompat;
 import com.example.appbanthietbidientu.Adapter.GioHangAdapter;
 import com.example.appbanthietbidientu.R;
 import com.example.appbanthietbidientu.ultil.CheckConnect;
+import com.google.gson.Gson;
 
 import java.text.DecimalFormat;
 
@@ -139,27 +140,33 @@ public class GioHangActivity extends AppCompatActivity {
         btnThanhToanTien.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(MainActivity.gioHangArrayList.size() >= 1){
+                if (MainActivity.gioHangArrayList.size() >= 1) {
                     progressDialog.show();
-                    CountDownTimer countDownTimer = new CountDownTimer(3000,3000) {
+                    CountDownTimer countDownTimer = new CountDownTimer(3000, 3000) {
                         @Override
                         public void onTick(long millisUntilFinished) {
-
+                            // Nothing to do on tick
                         }
 
                         @Override
                         public void onFinish() {
                             progressDialog.dismiss();
-                            Intent intent=new Intent(GioHangActivity.this,ThongTinKhachHang.class);
+                            Intent intent = new Intent(GioHangActivity.this, ThongTinKhachHang.class);
+                            // Convert the list of products to a JSON string
+                            Gson gson = new Gson();
+                            String productsJson = gson.toJson(MainActivity.gioHangArrayList);
+                            // Pass the JSON string as an extra with the intent
+                            intent.putExtra("ProductsJson", productsJson);
                             intent.putExtra("TotalMoney", String.valueOf(txtTongTien.getText()));
                             startActivity(intent);
                         }
                     }.start();
-                }else {
-                    CheckConnect.ShowToast_Short(getApplicationContext(),"Giỏ hàng của bạn chưa có sản phẩm");
+                } else {
+                    CheckConnect.ShowToast_Short(getApplicationContext(), "Giỏ hàng của bạn chưa có sản phẩm");
                 }
             }
         });
+
     }
 
     private void Actionbar() {

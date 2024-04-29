@@ -15,113 +15,153 @@
         android:background="#0b162a"
         app:title="Thông Tin Khách Hàng"
         app:titleTextColor="#FFFFFF"/>
+
     <LinearLayout
-        android:background="@drawable/boder"
+        android:layout_width="match_parent"
+        android:layout_height="560dp"
         android:layout_marginHorizontal="30dp"
         android:layout_marginVertical="80dp"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:background="@drawable/boder"
+        android:orientation="vertical">
+
         <TextView
-            android:text="Thông Tin Khách Hàng"
-            android:gravity="center"
-            android:layout_marginTop="30dp"
-            android:textSize="28sp"
-            android:textColor="#111"
-            android:textStyle="bold"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:text="Thông Tin Khách Hàng"
+            android:textColor="#111"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/txtThanhToanTien"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:gravity="center"
             android:text="Thanh toán số tiền : 160.000đ"
-            android:textSize="18sp"
             android:textColor="#F44336"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:textSize="18sp" />
+
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_marginTop="35dp"
-            android:layout_marginHorizontal="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <EditText
-                android:id="@+id/TenKhachHang"
-                android:inputType="text"
-                android:textSize="18sp"
-                android:textColor="#111"
-                android:hint="Nhập tên khách hàng"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-        </com.google.android.material.textfield.TextInputLayout>
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_marginTop="30dp"
-            android:layout_marginHorizontal="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <EditText
-                android:id="@+id/SoDienThoai"
-                android:inputType="phone"
-                android:textSize="18sp"
-                android:textColor="#111"
-                android:hint="Nhập số điện thoại"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-        </com.google.android.material.textfield.TextInputLayout>
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_marginTop="30dp"
-            android:layout_marginHorizontal="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <EditText
-                android:id="@+id/EmailKhachHang"
-                android:inputType="text"
-                android:textSize="18sp"
-                android:textColor="#111"
-                android:hint="Nhập email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:ignore="TextFields" />
-        </com.google.android.material.textfield.TextInputLayout>
-        <LinearLayout
-            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="35dp">
+
+            <EditText
+                android:id="@+id/TenKhachHang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nhập tên khách hàng"
+                android:inputType="text"
+                android:textColor="#111"
+                android:textSize="18sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="30dp">
+
+            <EditText
+                android:id="@+id/SoDienThoai"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nhập số điện thoại"
+                android:inputType="phone"
+                android:textColor="#111"
+                android:textSize="18sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="30dp">
+
+            <EditText
+                android:id="@+id/EmailKhachHang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nhập địa chỉ"
+                android:textColor="#111"
+                android:textSize="18sp"
+                android:inputType="text"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.paypal.checkout.paymentbutton.PaymentButtonContainer
+            android:id="@+id/payment_button_container"
+            android:layout_width="match_parent"
+            android:layout_height="71dp"
+            android:layout_centerInParent="true"
+            app:paypal_button_color="blue"
+            app:paypal_button_enabled="true"
+            app:paypal_button_label="pay"
+            app:paypal_button_shape="rectangle"
+            app:paypal_button_size="large" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
+            android:layout_marginBottom="30dp"
+            android:gravity="center"
             android:orientation="horizontal">
+
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="30dp"
                 app:cardCornerRadius="10dp">
+
                 <TextView
                     android:id="@+id/XacNhan"
-                    android:text="Xác Nhận"
-                    android:textStyle="bold"
-                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:background="#01C609"
                     android:padding="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:text="Xác Nhận"
+
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
             </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/Huy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#01C609"
+                android:paddingHorizontal="27dp"
+                android:paddingVertical="10dp"
+                android:text="Huỷ"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
                 app:cardCornerRadius="10dp">
-                <TextView
-                    android:id="@+id/Huy"
-                    android:text="Huỷ"
-                    android:textStyle="bold"
-                    android:textColor="@color/white"
-                    android:background="#01C609"
-                    android:paddingHorizontal="27dp"
-                    android:paddingVertical="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+
             </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/DatHang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#01C609"
+                android:padding="10dp"
+                android:text="Đặt Hàng"
+
+                android:textColor="@color/white"
+                android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
