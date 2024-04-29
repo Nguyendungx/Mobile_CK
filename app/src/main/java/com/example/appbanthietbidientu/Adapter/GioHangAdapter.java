@@ -80,7 +80,7 @@ public class GioHangAdapter extends BaseAdapter {
         viewHolder.txtTenGioHang.setTypeface(semibold);
         DecimalFormat decimalFormat=new DecimalFormat("###,###,###");
         viewHolder.txtGiaGioHang.setText(decimalFormat.format(gioHang.getGiasp())+"₫");
-        Picasso.with(context).load(gioHang.getHinhsp())
+        Picasso.get().load(gioHang.getHinhsp())
                 .placeholder(R.drawable.loadimage)
                 .error(R.drawable.errorimage)
                 .into(viewHolder.imgGioHang);
@@ -146,4 +146,6 @@ public class GioHangAdapter extends BaseAdapter {
 
         return view;
     }
+
+
 }

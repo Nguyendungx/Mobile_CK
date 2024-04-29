@@ -1,0 +1,1942 @@
+Index: app/src/main/res/layout/activity_admin_chi_tiet_don_hang.xml
+===================================================================
+diff --git a/app/src/main/res/layout/activity_admin_chi_tiet_don_hang.xml b/app/src/main/res/layout/activity_admin_chi_tiet_don_hang.xml
+new file mode 100644
+--- /dev/null	(revision Shelved Version)
++++ b/app/src/main/res/layout/activity_admin_chi_tiet_don_hang.xml	(revision Shelved Version)
+@@ -0,0 +1,89 @@
++<?xml version="1.0" encoding="utf-8"?>
++<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    android:orientation="vertical"
++    tools:context=".Activity.ChiTietDonHangActivity">
++
++    <androidx.appcompat.widget.Toolbar
++        android:id="@+id/ToolbarChiTietDonHang"
++        android:layout_width="match_parent"
++        android:layout_height="?attr/actionBarSize"
++        android:background="#2196F3"
++        app:title="Chi Tiết Đơn Hàng"
++        app:titleTextColor="#FFFFFF" />
++
++    <TextView
++        android:id="@+id/TextThongTinKhachHang"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:layout_marginStart="16dp"
++        android:layout_marginTop="16dp"
++        android:text="Thông tin khách hàng:"
++        android:textSize="18sp" />
++
++    <TextView
++        android:id="@+id/TextTenKhachHang"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:layout_marginStart="16dp"
++        android:layout_marginTop="8dp"
++        android:text="Tên: -"
++        android:textSize="16sp" />
++
++    <TextView
++        android:id="@+id/TextTrangThaiDonHang"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:layout_marginStart="16dp"
++        android:layout_marginTop="16dp"
++        android:text="Trạng thái đơn hàng:"
++        android:textSize="18sp" />
++
++    <Spinner
++        android:id="@+id/spinnerTrangThai"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:layout_marginStart="16dp"
++        android:layout_marginTop="8dp"
++        android:textSize="16sp" />
++
++    <TextView
++        android:id="@+id/TextTongTien"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:layout_marginStart="16dp"
++        android:layout_marginTop="16dp"
++        android:text="Tổng tiền:"
++        android:textSize="18sp" />
++
++    <TextView
++        android:id="@+id/TextGiaTriTongTien"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:layout_marginStart="16dp"
++        android:layout_marginTop="8dp"
++        android:text="-"
++        android:textSize="16sp"
++        android:textStyle="bold" />
++
++
++    <TextView
++        android:id="@+id/textThoiGian"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:layout_marginStart="16dp"
++        android:layout_marginTop="8dp"
++        android:text="13/01/2024"
++        android:textSize="16sp"
++        android:textStyle="bold" />
++
++    <androidx.recyclerview.widget.RecyclerView
++        android:id="@+id/recyclerViewDonHangChiTiet"
++        android:layout_width="match_parent"
++        android:layout_height="0dp"
++        android:layout_weight="1"
++        android:layout_marginTop="16dp" />
++</LinearLayout>
+Index: app/src/main/res/layout/activity_admin_quanlydonhang.xml
+===================================================================
+diff --git a/app/src/main/res/layout/activity_admin_quanlydonhang.xml b/app/src/main/res/layout/activity_admin_quanlydonhang.xml
+new file mode 100644
+--- /dev/null	(revision Shelved Version)
++++ b/app/src/main/res/layout/activity_admin_quanlydonhang.xml	(revision Shelved Version)
+@@ -0,0 +1,30 @@
++<?xml version="1.0" encoding="utf-8"?>
++<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    android:orientation="vertical"
++    android:background="#FFFFFF"
++    tools:context=".Activity.QuanLyDonHangActivity">
++
++    <androidx.appcompat.widget.Toolbar
++        android:id="@+id/ToolbarQuanLyDonHang"
++        android:background="#2196F3"
++        app:title="Quản lý đơn hàng"
++        app:titleTextColor="#FFFFFF"
++        android:layout_width="match_parent"
++        android:layout_height="?attr/actionBarSize"
++        />
++    <ListView
++        android:id="@+id/listviewDonHang"
++        android:layout_below="@+id/ToolbarQuanLyDonHang"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"/>
++    <ProgressBar
++        android:id="@+id/loadDonHang"
++        android:layout_centerInParent="true"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:visibility="invisible"/>
++</RelativeLayout>
+\ No newline at end of file
+Index: app/src/main/res/layout/activity_thong_tin_khach_hang.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_thong_tin_khach_hang.xml b/app/src/main/res/layout/activity_thong_tin_khach_hang.xml
+--- a/app/src/main/res/layout/activity_thong_tin_khach_hang.xml	(revision Local Version)
++++ b/app/src/main/res/layout/activity_thong_tin_khach_hang.xml	(revision Shelved Version)
+@@ -15,112 +15,138 @@
+         android:background="#0b162a"
+         app:title="Thông Tin Khách Hàng"
+         app:titleTextColor="#FFFFFF"/>
++
+     <LinearLayout
+-        android:background="@drawable/boder"
++        android:layout_width="match_parent"
++        android:layout_height="560dp"
+         android:layout_marginHorizontal="30dp"
+         android:layout_marginVertical="80dp"
+-        android:orientation="vertical"
+-        android:layout_width="match_parent"
+-        android:layout_height="wrap_content">
+-        <TextView
++        android:background="@drawable/boder"
++        android:orientation="vertical">
++
++        <TextView
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="30dp"
++            android:gravity="center"
+             android:text="Thông Tin Khách Hàng"
+-            android:gravity="center"
+-            android:layout_marginTop="30dp"
++            android:textColor="#111"
+             android:textSize="28sp"
+-            android:textColor="#111"
+-            android:textStyle="bold"
+-            android:layout_width="match_parent"
+-            android:layout_height="wrap_content"/>
++            android:textStyle="bold" />
++
+         <TextView
+             android:id="@+id/txtThanhToanTien"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
+             android:layout_gravity="center"
+             android:layout_marginTop="10dp"
+             android:gravity="center"
+             android:text="Thanh toán số tiền : 160.000đ"
+-            android:textSize="18sp"
+             android:textColor="#F44336"
+-            android:layout_width="wrap_content"
+-            android:layout_height="wrap_content"/>
++            android:textSize="18sp" />
++
+         <com.google.android.material.textfield.TextInputLayout
+-            android:layout_marginTop="35dp"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
+             android:layout_marginHorizontal="10dp"
+-            android:layout_width="match_parent"
+-            android:layout_height="wrap_content">
++            android:layout_marginTop="35dp">
++
+             <EditText
+                 android:id="@+id/TenKhachHang"
++                android:layout_width="match_parent"
++                android:layout_height="wrap_content"
++                android:hint="Nhập tên khách hàng"
+                 android:inputType="text"
+-                android:textSize="18sp"
+                 android:textColor="#111"
+-                android:hint="Nhập tên khách hàng"
+-                android:layout_width="match_parent"
+-                android:layout_height="wrap_content"/>
++                android:textSize="18sp" />
+         </com.google.android.material.textfield.TextInputLayout>
++
+         <com.google.android.material.textfield.TextInputLayout
+-            android:layout_marginTop="30dp"
+-            android:layout_marginHorizontal="10dp"
+             android:layout_width="match_parent"
+-            android:layout_height="wrap_content">
++            android:layout_height="wrap_content"
++            android:layout_marginHorizontal="10dp"
++            android:layout_marginTop="30dp">
++
+             <EditText
+                 android:id="@+id/SoDienThoai"
++                android:layout_width="match_parent"
++                android:layout_height="wrap_content"
++                android:hint="Nhập số điện thoại"
+                 android:inputType="phone"
+-                android:textSize="18sp"
+                 android:textColor="#111"
+-                android:hint="Nhập số điện thoại"
+-                android:layout_width="match_parent"
+-                android:layout_height="wrap_content"/>
++                android:textSize="18sp" />
+         </com.google.android.material.textfield.TextInputLayout>
++
+         <com.google.android.material.textfield.TextInputLayout
+-            android:layout_marginTop="30dp"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
+             android:layout_marginHorizontal="10dp"
+-            android:layout_width="match_parent"
+-            android:layout_height="wrap_content">
++            android:layout_marginTop="30dp">
++
+             <EditText
+                 android:id="@+id/EmailKhachHang"
++                android:layout_width="match_parent"
++                android:layout_height="wrap_content"
++                android:hint="Nhập email"
+                 android:inputType="text"
+-                android:textSize="18sp"
+                 android:textColor="#111"
+-                android:hint="Nhập email"
+-                android:layout_width="match_parent"
+-                android:layout_height="wrap_content"
++                android:textSize="18sp"
+                 tools:ignore="TextFields" />
++
+         </com.google.android.material.textfield.TextInputLayout>
++
++        <com.paypal.checkout.paymentbutton.PaymentButtonContainer
++            android:id="@+id/payment_button_container"
++            android:layout_width="match_parent"
++            android:layout_height="71dp"
++            android:layout_centerInParent="true"
++            app:paypal_button_color="blue"
++            app:paypal_button_enabled="true"
++            app:paypal_button_label="pay"
++            app:paypal_button_shape="rectangle"
++            app:paypal_button_size="large" />
++
+         <LinearLayout
+-            android:gravity="center"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
++            android:layout_marginTop="40dp"
+             android:layout_marginBottom="30dp"
+-            android:layout_marginTop="40dp"
++            android:gravity="center"
+             android:orientation="horizontal">
++
+             <androidx.cardview.widget.CardView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginEnd="30dp"
+                 app:cardCornerRadius="10dp">
++
+                 <TextView
+                     android:id="@+id/XacNhan"
+-                    android:text="Xác Nhận"
+-                    android:textStyle="bold"
+-                    android:textColor="@color/white"
++                    android:layout_width="wrap_content"
++                    android:layout_height="wrap_content"
+                     android:background="#01C609"
+                     android:padding="10dp"
+-                    android:layout_width="wrap_content"
+-                    android:layout_height="wrap_content"/>
++                    android:text="Xác Nhận"
++                    android:textColor="@color/white"
++                    android:textStyle="bold" />
+             </androidx.cardview.widget.CardView>
++
+             <androidx.cardview.widget.CardView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginStart="30dp"
+                 app:cardCornerRadius="10dp">
++
+                 <TextView
+                     android:id="@+id/Huy"
+-                    android:text="Huỷ"
+-                    android:textStyle="bold"
+-                    android:textColor="@color/white"
++                    android:layout_width="wrap_content"
++                    android:layout_height="wrap_content"
+                     android:background="#01C609"
+                     android:paddingHorizontal="27dp"
+                     android:paddingVertical="10dp"
+-                    android:layout_width="wrap_content"
+-                    android:layout_height="wrap_content"/>
++                    android:text="Huỷ"
++                    android:textColor="@color/white"
++                    android:textStyle="bold" />
+             </androidx.cardview.widget.CardView>
+         </LinearLayout>
+     </LinearLayout>
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+--- a/app/src/main/AndroidManifest.xml	(revision Local Version)
++++ b/app/src/main/AndroidManifest.xml	(revision Shelved Version)
+@@ -23,6 +23,9 @@
+     <uses-permission android:name="android.permission.CAMERA" />
+ 
+     <application
++        android:allowClearUserData="true"
++
++        android:name=".Activity.PayPal"
+         android:allowBackup="true"
+         android:dataExtractionRules="@xml/data_extraction_rules"
+         android:fullBackupContent="@xml/backup_rules"
+@@ -35,6 +38,12 @@
+         tools:targetApi="31">
+         <activity
+             android:name=".Activity.MeetingActivity"
++            android:exported="false" />
++        <activity
++            android:name=".Activity.QuanLyDonHangActivity"
++            android:exported="false" />
++        <activity
++            android:name=".Activity.ChiTietDonHangActivity"
+             android:exported="false" />
+         <activity
+             android:name=".Activity.JoinActivity"
+Index: app/src/main/java/com/example/appbanthietbidientu/ultil/ApiSp.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/appbanthietbidientu/ultil/ApiSp.java b/app/src/main/java/com/example/appbanthietbidientu/ultil/ApiSp.java
+--- a/app/src/main/java/com/example/appbanthietbidientu/ultil/ApiSp.java	(revision Local Version)
++++ b/app/src/main/java/com/example/appbanthietbidientu/ultil/ApiSp.java	(revision Shelved Version)
+@@ -1,6 +1,7 @@
+ package com.example.appbanthietbidientu.ultil;
+ 
+ import com.example.appbanthietbidientu.model.Comment;
++import com.example.appbanthietbidientu.model.DonHang;
+ import com.example.appbanthietbidientu.model.Sanpham;
+ import com.example.appbanthietbidientu.response.SignInResponse;
+ import com.google.gson.Gson;
+@@ -55,6 +56,10 @@
+     @GET("laptop.json")
+     Call<List<Sanpham>> getlistLapTop();
+ 
++    @GET("donhang.json")
++    Call<List<DonHang>> getlistDonHang();
++
++
+     @Multipart
+     @POST("thongtinkhachhang.php")
+     Call<SignInResponse> getThongTinKhachHang(@Part(Const.KEY_USERNAME) RequestBody tenkhachhang,
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/build.gradle b/app/build.gradle
+--- a/app/build.gradle	(revision Local Version)
++++ b/app/build.gradle	(revision Shelved Version)
+@@ -45,7 +45,7 @@
+     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+ 
+-    implementation 'com.squareup.picasso:picasso:2.5.2'
++    implementation 'com.squareup.picasso:picasso:2.8'
+     implementation 'com.android.volley:volley:1.2.1'
+     implementation 'com.google.code.gson:gson:2.10.1'
+     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+@@ -63,4 +63,7 @@
+     implementation 'com.google.android.exoplayer:exoplayer:2.18.5'
+     implementation platform('com.google.firebase:firebase-bom:32.8.0')
+     implementation 'com.google.firebase:firebase-analytics'
++
++    //paypal
++    implementation('com.paypal.checkout:android-sdk:1.1.0')
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/example/appbanthietbidientu/Activity/ChiTietDonHangActivity.java
+===================================================================
+diff --git a/app/src/main/java/com/example/appbanthietbidientu/Activity/ChiTietDonHangActivity.java b/app/src/main/java/com/example/appbanthietbidientu/Activity/ChiTietDonHangActivity.java
+new file mode 100644
+--- /dev/null	(revision Shelved Version)
++++ b/app/src/main/java/com/example/appbanthietbidientu/Activity/ChiTietDonHangActivity.java	(revision Shelved Version)
+@@ -0,0 +1,112 @@
++package com.example.appbanthietbidientu.Activity;
++
++import android.os.Bundle;
++import android.util.Log;
++import android.widget.ArrayAdapter;
++import android.widget.Spinner;
++import android.widget.TextView;
++
++import androidx.annotation.NonNull;
++import androidx.appcompat.app.AppCompatActivity;
++import androidx.appcompat.widget.Toolbar;
++import androidx.recyclerview.widget.RecyclerView;
++
++import com.example.appbanthietbidientu.R;
++import com.google.firebase.database.DataSnapshot;
++import com.google.firebase.database.DatabaseError;
++import com.google.firebase.database.DatabaseReference;
++import com.google.firebase.database.FirebaseDatabase;
++import com.google.firebase.database.ValueEventListener;
++
++import java.text.SimpleDateFormat;
++import java.util.ArrayList;
++import java.util.Date;
++import java.util.List;
++import java.util.Locale;
++
++public class ChiTietDonHangActivity extends AppCompatActivity {
++
++    Toolbar toolbarChiTietDonHang;
++    TextView textThongTinKhachHang;
++    TextView textTenKhachHang;
++    TextView textTrangThaiDonHang;
++    TextView textChiTietTrangThai;
++    TextView textGiaTriTongTien;
++    TextView textThoiGian;
++
++    RecyclerView recyclerViewDonHangChiTiet;
++    Spinner spinnerTrangThai;
++
++    DatabaseReference donHangRef;
++    // Khai báo trangThaiList ở mức lớp
++    List<String> trangThaiList = new ArrayList<>();
++    @Override
++    protected void onCreate(Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++        setContentView(R.layout.activity_admin_chi_tiet_don_hang);
++
++        // Khởi tạo các thành phần giao diện và thiết lập sự kiện
++        Khaibao();
++        getInfoDonHang();
++    }
++
++
++    private void Khaibao() {
++        toolbarChiTietDonHang = findViewById(R.id.ToolbarChiTietDonHang);
++        textThongTinKhachHang = findViewById(R.id.TextThongTinKhachHang);
++        textTenKhachHang = findViewById(R.id.TextTenKhachHang);
++        textTrangThaiDonHang = findViewById(R.id.TextTrangThaiDonHang);
++        textThoiGian=findViewById(R.id.textThoiGian);
++        textGiaTriTongTien = findViewById(R.id.TextGiaTriTongTien);
++        recyclerViewDonHangChiTiet = findViewById(R.id.recyclerViewDonHangChiTiet);
++        spinnerTrangThai = findViewById(R.id.spinnerTrangThai);
++
++        // Khởi tạo đối tượng DatabaseReference
++        donHangRef = FirebaseDatabase.getInstance().getReference("donhang");
++
++        // Khởi tạo Spinner với danh sách trạng thái đơn hàng
++        trangThaiList.add("Đang xử lý");
++        trangThaiList.add("Đã xác nhận");
++        trangThaiList.add("Đã giao hàng");
++        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, trangThaiList);
++        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
++        spinnerTrangThai.setAdapter(adapter);
++    }
++
++    private void getInfoDonHang() {
++        String idDonHang = getIntent().getStringExtra("idDonHang");
++
++        // Tham chiếu đến nút trong cơ sở dữ liệu Firebase Realtime
++        donHangRef.child(idDonHang).addListenerForSingleValueEvent(new ValueEventListener() {
++            @Override
++            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
++                if (dataSnapshot.exists()) {
++                    // Lấy dữ liệu từ dataSnapshot
++                    String tenKhachHang = dataSnapshot.child("user").getValue(String.class);
++                    long thoiGian = dataSnapshot.child("thoigian").getValue(Long.class);
++                    int total = dataSnapshot.child("total").getValue(Integer.class);
++                    String trangThai = dataSnapshot.child("trangthai").getValue(String.class);
++                    textTenKhachHang.setText(tenKhachHang);
++                    if ("Da Thanh Toan".equals(trangThai)) {
++                        spinnerTrangThai.setSelection(trangThaiList.indexOf("Đã giao hàng"));
++                    }
++                    else if("Dang van chuyen".equals(trangThai))
++                    {
++                        spinnerTrangThai.setSelection(trangThaiList.indexOf("Đang xử lý"));
++                    }
++                    else if("Da xac nhan".equals(trangThai))
++                    {
++                        spinnerTrangThai.setSelection(trangThaiList.indexOf("Đã xác nhận"));
++                    }
++                    textGiaTriTongTien.setText(String.valueOf(total));
++                }
++            }
++
++            @Override
++            public void onCancelled(@NonNull DatabaseError databaseError) {
++                // Xử lý khi có lỗi xảy ra
++                Log.e("Firebase Error", "Lỗi khi truy xuất dữ liệu từ Firebase: " + databaseError.getMessage());
++            }
++        });
++    }
++}
+Index: app/src/main/java/com/example/appbanthietbidientu/Activity/ChiTietSanPhamActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/appbanthietbidientu/Activity/ChiTietSanPhamActivity.java b/app/src/main/java/com/example/appbanthietbidientu/Activity/ChiTietSanPhamActivity.java
+--- a/app/src/main/java/com/example/appbanthietbidientu/Activity/ChiTietSanPhamActivity.java	(revision Local Version)
++++ b/app/src/main/java/com/example/appbanthietbidientu/Activity/ChiTietSanPhamActivity.java	(revision Shelved Version)
+@@ -36,8 +36,24 @@
+ import com.google.firebase.database.DatabaseReference;
+ import com.google.firebase.database.FirebaseDatabase;
+ import com.google.firebase.database.ValueEventListener;
++import com.paypal.checkout.approve.Approval;
++import com.paypal.checkout.approve.OnApprove;
++import com.paypal.checkout.createorder.CreateOrder;
++import com.paypal.checkout.createorder.CreateOrderActions;
++import com.paypal.checkout.createorder.CurrencyCode;
++import com.paypal.checkout.createorder.OrderIntent;
++import com.paypal.checkout.createorder.UserAction;
++import com.paypal.checkout.order.Amount;
++import com.paypal.checkout.order.AppContext;
++import com.paypal.checkout.order.CaptureOrderResult;
++import com.paypal.checkout.order.OnCaptureComplete;
++import com.paypal.checkout.order.OrderRequest;
++import com.paypal.checkout.order.PurchaseUnit;
++import com.paypal.checkout.paymentbutton.PaymentButtonContainer;
+ import com.squareup.picasso.Picasso;
+ 
++import org.jetbrains.annotations.NotNull;
++
+ import java.text.DecimalFormat;
+ import java.text.SimpleDateFormat;
+ import java.time.LocalDateTime;
+@@ -64,6 +80,9 @@
+     Button buttonSendComment;
+     Button btn_Delete;
+     CommentAdapter commentAdapter;
++
++
++
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+@@ -147,7 +166,7 @@
+         motaChiTiet.setText(sanpham.getMotasanpham());
+         Typeface regular = ResourcesCompat.getFont(ChiTietSanPhamActivity.this,R.font.svn_gilroy_regular);
+         motaChiTiet.setTypeface(regular);
+-        Picasso.with(getApplicationContext()).load(sanpham.getHinhanhsanpham())
++        Picasso.get().load(sanpham.getHinhanhsanpham())
+                 .placeholder(R.drawable.loadimage)
+                 .error(R.drawable.errorimage)
+                 .into(anhChitietsp);
+@@ -323,6 +342,8 @@
+         recyclerViewComments = findViewById(R.id.recyclerViewComments);
+         editTextComment = findViewById(R.id.editTextComment);
+         buttonSendComment = findViewById(R.id.buttonSendComment);
++
++
+         buttonSendComment.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+Index: app/src/main/java/com/example/appbanthietbidientu/model/DonHang.java
+===================================================================
+diff --git a/app/src/main/java/com/example/appbanthietbidientu/model/DonHang.java b/app/src/main/java/com/example/appbanthietbidientu/model/DonHang.java
+new file mode 100644
+--- /dev/null	(revision Shelved Version)
++++ b/app/src/main/java/com/example/appbanthietbidientu/model/DonHang.java	(revision Shelved Version)
+@@ -0,0 +1,81 @@
++package com.example.appbanthietbidientu.model;
++
++import java.io.Serializable;
++import java.util.ArrayList;
++
++public class DonHang implements Serializable {
++    private String id;
++    private ArrayList<GioHang> danhSachSanPham;
++    private long thoiGian;
++    private int total;
++    private String trangThai;
++    private String user;
++
++    public DonHang(String number, ArrayList<GioHang> dssanpham, String thoigian, int total, String trangthai, String user) {
++        // Constructor mặc định (cần thiết cho Firebase)
++    }
++
++    public DonHang() {
++
++    }
++
++    public String getId() {
++        return id;
++    }
++
++    public void setId(String id) {
++        this.id = id;
++    }
++
++    public ArrayList<GioHang> getDanhSachSanPham() {
++        return danhSachSanPham;
++    }
++
++    public void setDanhSachSanPham(ArrayList<GioHang> danhSachSanPham) {
++        this.danhSachSanPham = danhSachSanPham;
++    }
++
++    public long getThoiGian() {
++        return thoiGian;
++    }
++
++    public void setThoiGian(long thoiGian) {
++        this.thoiGian = thoiGian;
++    }
++
++    public int getTotal() {
++        return total;
++    }
++
++    public void setTotal(int total) {
++        this.total = total;
++    }
++
++    public String getTrangThai() {
++        return trangThai;
++    }
++
++    public void setTrangThai(String trangThai) {
++        this.trangThai = trangThai;
++    }
++
++    public String getUser() {
++        return user;
++    }
++
++    public void setUser(String user) {
++        this.user = user;
++    }
++
++    @Override
++    public String toString() {
++        return "DonHang{" +
++                "id='" + id + '\'' +
++                ", danhSachSanPham=" + danhSachSanPham +
++                ", total=" + total +
++                ", user='" + user + '\'' +
++                ", thoiGian=" + thoiGian +
++                '}';
++    }
++
++}
+\ No newline at end of file
+Index: app/src/main/java/com/example/appbanthietbidientu/Adapter/DonHangAdapter.java
+===================================================================
+diff --git a/app/src/main/java/com/example/appbanthietbidientu/Adapter/DonHangAdapter.java b/app/src/main/java/com/example/appbanthietbidientu/Adapter/DonHangAdapter.java
+new file mode 100644
+--- /dev/null	(revision Shelved Version)
++++ b/app/src/main/java/com/example/appbanthietbidientu/Adapter/DonHangAdapter.java	(revision Shelved Version)
+@@ -0,0 +1,114 @@
++package com.example.appbanthietbidientu.Adapter;
++
++import android.content.Context;
++import android.view.LayoutInflater;
++import android.view.View;
++import android.view.ViewGroup;
++import android.widget.BaseAdapter;
++import android.widget.Filter;
++import android.widget.Filterable;
++import android.widget.TextView;
++
++import com.example.appbanthietbidientu.R;
++import com.example.appbanthietbidientu.model.DonHang;
++
++import java.util.ArrayList;
++import java.util.List;
++
++public class DonHangAdapter extends BaseAdapter implements Filterable {
++    private List<DonHang> donHangList, donHangoldList;
++    private Context context;
++
++    public DonHangAdapter(List<DonHang> donHangList, Context context) {
++        this.donHangList = donHangList;
++        this.donHangoldList = donHangList;
++        this.context = context;
++    }
++
++    @Override
++    public int getCount() {
++        return donHangList.size();
++    }
++
++    @Override
++    public Object getItem(int position) {
++        return donHangList.get(position);
++    }
++
++    @Override
++    public long getItemId(int position) {
++        return position;
++    }
++
++    @Override
++    public View getView(int position, View convertView, ViewGroup parent) {
++        View view = convertView;
++        ViewHolder viewHolder;
++
++        if (view == null) {
++            view = LayoutInflater.from(context).inflate(R.layout.item_donhang, parent, false);
++            viewHolder = new ViewHolder();
++            viewHolder.idDonHang = view.findViewById(R.id.idDonHang);
++            viewHolder.idUser = view.findViewById(R.id.idUser);
++            viewHolder.idQt = view.findViewById(R.id.idQt);
++            viewHolder.idTotal = view.findViewById(R.id.idTotal);
++            viewHolder.idNgayDat = view.findViewById(R.id.idNgayDat);
++            viewHolder.idTrangThai= view.findViewById(R.id.idTrangThai);
++            view.setTag(viewHolder);
++        } else {
++            viewHolder = (ViewHolder) view.getTag();
++        }
++
++        DonHang donHang = donHangList.get(position);
++
++        // Hiển thị thông tin đơn hàng
++        viewHolder.idDonHang.setText(donHang.getId());
++        viewHolder.idUser.setText("ID Khách: " + donHang.getUser());
++        viewHolder.idQt.setText("Qt: " + donHang.getDanhSachSanPham().size()); // Đổi thành kích thước danh sách sản phẩm
++        viewHolder.idTotal.setText("Total: $" + donHang.getTotal());
++        viewHolder.idNgayDat.setText(String.valueOf(donHang.getThoiGian())); // Sử dụng thời gian đặt hàng
++        viewHolder.idTrangThai.setText("Trạng thái đơn hàng: "+donHang.getTrangThai()); // Sử dụng thời gian đặt hàng
++
++
++        return view;
++    }
++
++    private static class ViewHolder {
++        TextView idDonHang;
++        TextView idUser;
++        TextView idQt;
++        TextView idTotal;
++        TextView idNgayDat;
++        TextView idTrangThai;
++    }
++
++
++    public Filter getFilter() {
++        return new Filter() {
++            @Override
++            protected FilterResults performFiltering(CharSequence constraint) {
++                String strSearch = constraint.toString().toLowerCase();
++                if (strSearch.isEmpty()) {
++                    donHangList = donHangoldList;
++                } else {
++                    List<DonHang> list = new ArrayList<>();
++                    for (DonHang sanpham : donHangoldList) {
++                        if (sanpham.getUser().toLowerCase().contains(strSearch)) {
++                            list.add(sanpham);
++                        }
++                    }
++                    donHangList = list;
++                }
++                FilterResults filterResults = new FilterResults();
++                filterResults.values = donHangList;
++                return filterResults;
++            }
++
++            @Override
++            protected void publishResults(CharSequence constraint, FilterResults results) {
++                donHangList = (List<DonHang>) results.values;
++                notifyDataSetChanged();
++            }
++        };
++    }
++}
+Index: app/src/main/java/com/example/appbanthietbidientu/Adapter/DonhangmoiAdapter.java
+===================================================================
+diff --git a/app/src/main/java/com/example/appbanthietbidientu/Adapter/DonhangmoiAdapter.java b/app/src/main/java/com/example/appbanthietbidientu/Adapter/DonhangmoiAdapter.java
+new file mode 100644
+--- /dev/null	(revision Shelved Version)
++++ b/app/src/main/java/com/example/appbanthietbidientu/Adapter/DonhangmoiAdapter.java	(revision Shelved Version)
+@@ -0,0 +1,86 @@
++package com.example.appbanthietbidientu.Adapter;
++
++import android.content.Context;
++import android.content.Intent;
++import android.graphics.Typeface;
++import android.view.LayoutInflater;
++import android.view.View;
++import android.view.ViewGroup;
++import android.widget.ImageView;
++import android.widget.TextView;
++
++import androidx.annotation.NonNull;
++import androidx.core.content.res.ResourcesCompat;
++import androidx.recyclerview.widget.RecyclerView;
++
++import com.example.appbanthietbidientu.Activity.ChiTietDonHangActivity;
++import com.example.appbanthietbidientu.R;
++import com.example.appbanthietbidientu.model.DonHang;
++import com.example.appbanthietbidientu.ultil.CheckConnect;
++import com.squareup.picasso.Picasso;
++
++import java.text.DecimalFormat;
++import java.util.List;
++
++public class DonhangmoiAdapter extends RecyclerView.Adapter<DonhangmoiAdapter.DonHangViewHolder> {
++    private List<DonHang> donhangList;
++    private Context context;
++
++    public DonhangmoiAdapter(List<DonHang> donhangList, Context context) {
++        this.donhangList = donhangList;
++        this.context = context;
++    }
++
++    @NonNull
++    @Override
++    public DonHangViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
++        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_donhang, parent, false);
++        return new DonHangViewHolder(view);
++    }
++
++    @Override
++    public void onBindViewHolder(@NonNull DonHangViewHolder holder, int position) {
++        DonHang donHang = donhangList.get(position);
++        holder.txtIdDonHang.setText("ID Đơn hàng: " + donHang.getId());
++        holder.txtIdUser.setText("ID Khách hàng: " + donHang.getUser());
++        holder.txtQt.setText("Số lượng sản phẩm: " + donHang.getDanhSachSanPham().size());
++        DecimalFormat decimalFormat = new DecimalFormat("$###,###,###");
++        holder.txtTotal.setText("Tổng tiền: " + decimalFormat.format(donHang.getTotal()));
++        holder.txtNgayDat.setText("Ngày đặt hàng: " + donHang.getThoiGian());
++
++        // Nếu cần, bạn có thể sử dụng Picasso để tải ảnh hình minh họa cho đơn hàng ở đây
++        // Picasso.get().load(donHang.getHinhDonHang()).placeholder(R.drawable.placeholder_image).into(holder.imgDonHang);
++    }
++
++    @Override
++    public int getItemCount() {
++        return donhangList.size();
++    }
++
++    public class DonHangViewHolder extends RecyclerView.ViewHolder {
++        private TextView txtIdDonHang, txtIdUser, txtQt, txtTotal, txtNgayDat;
++        private ImageView imgDonHang;
++
++        public DonHangViewHolder(@NonNull View itemView) {
++            super(itemView);
++            txtIdDonHang = itemView.findViewById(R.id.idDonHang);
++            txtIdUser = itemView.findViewById(R.id.idUser);
++            txtQt = itemView.findViewById(R.id.idQt);
++            txtTotal = itemView.findViewById(R.id.idTotal);
++            txtNgayDat = itemView.findViewById(R.id.idNgayDat);
++
++            // Xử lý sự kiện khi người dùng nhấp vào một mục đơn hàng
++            itemView.setOnClickListener(new View.OnClickListener() {
++                @Override
++                public void onClick(View view) {
++                    // Chuyển đến màn hình chi tiết đơn hàng khi nhấp vào
++                    Intent intent = new Intent(context, ChiTietDonHangActivity.class);
++                    intent.putExtra("thongtindonhang", donhangList.get(getAdapterPosition()));
++                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
++                    CheckConnect.ShowToast_Short(context,donhangList.get(getPosition()).getId());
++                    context.startActivity(intent);
++                }
++            });
++        }
++    }
++}
+Index: app/src/main/java/com/example/appbanthietbidientu/model/ExchangeRateResponse.java
+===================================================================
+diff --git a/app/src/main/java/com/example/appbanthietbidientu/model/ExchangeRateResponse.java b/app/src/main/java/com/example/appbanthietbidientu/model/ExchangeRateResponse.java
+new file mode 100644
+--- /dev/null	(revision Shelved Version)
++++ b/app/src/main/java/com/example/appbanthietbidientu/model/ExchangeRateResponse.java	(revision Shelved Version)
+@@ -0,0 +1,50 @@
++package com.example.appbanthietbidientu.model;
++
++import com.google.gson.annotations.SerializedName;
++import java.util.Map;
++
++public class ExchangeRateResponse {
++    @SerializedName("success")
++    private boolean success;
++
++    @SerializedName("timestamp")
++    private long timestamp;
++
++    @SerializedName("base")
++    private String base;
++
++    @SerializedName("rates")
++    private Map<String, Double> rates;
++
++    public boolean isSuccess() {
++        return success;
++    }
++
++    public void setSuccess(boolean success) {
++        this.success = success;
++    }
++
++    public long getTimestamp() {
++        return timestamp;
++    }
++
++    public void setTimestamp(long timestamp) {
++        this.timestamp = timestamp;
++    }
++
++    public String getBase() {
++        return base;
++    }
++
++    public void setBase(String base) {
++        this.base = base;
++    }
++
++    public Map<String, Double> getRates() {
++        return rates;
++    }
++
++    public void setRates(Map<String, Double> rates) {
++        this.rates = rates;
++    }
++}
+Index: app/src/main/java/com/example/appbanthietbidientu/model/GioHang.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/appbanthietbidientu/model/GioHang.java b/app/src/main/java/com/example/appbanthietbidientu/model/GioHang.java
+--- a/app/src/main/java/com/example/appbanthietbidientu/model/GioHang.java	(revision Local Version)
++++ b/app/src/main/java/com/example/appbanthietbidientu/model/GioHang.java	(revision Shelved Version)
+@@ -15,6 +15,10 @@
+         this.soluongsp = soluongsp;
+     }
+ 
++    public GioHang() {
++
++    }
++
+     public int getIdsp() {
+         return idsp;
+     }
+@@ -54,4 +58,16 @@
+     public void setSoluongsp(int soluongsp) {
+         this.soluongsp = soluongsp;
+     }
++
++    @Override
++    public String toString() {
++        return "GioHang{" +
++                "idsp=" + idsp +
++                ", tensp='" + tensp + '\'' +
++                ", giasp=" + giasp +
++                ", soluongsp=" + soluongsp +
++                ", hinhsp='" + hinhsp + '\'' +
++                '}';
++    }
++
+ }
+Index: app/src/main/java/com/example/appbanthietbidientu/Activity/GioHangActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/appbanthietbidientu/Activity/GioHangActivity.java b/app/src/main/java/com/example/appbanthietbidientu/Activity/GioHangActivity.java
+--- a/app/src/main/java/com/example/appbanthietbidientu/Activity/GioHangActivity.java	(revision Local Version)
++++ b/app/src/main/java/com/example/appbanthietbidientu/Activity/GioHangActivity.java	(revision Shelved Version)
+@@ -21,6 +21,7 @@
+ import com.example.appbanthietbidientu.Adapter.GioHangAdapter;
+ import com.example.appbanthietbidientu.R;
+ import com.example.appbanthietbidientu.ultil.CheckConnect;
++import com.google.gson.Gson;
+ 
+ import java.text.DecimalFormat;
+ 
+@@ -139,27 +140,33 @@
+         btnThanhToanTien.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+-                if(MainActivity.gioHangArrayList.size() >= 1){
++                if (MainActivity.gioHangArrayList.size() >= 1) {
+                     progressDialog.show();
+-                    CountDownTimer countDownTimer = new CountDownTimer(3000,3000) {
++                    CountDownTimer countDownTimer = new CountDownTimer(3000, 3000) {
+                         @Override
+                         public void onTick(long millisUntilFinished) {
+-
++                            // Nothing to do on tick
+                         }
+ 
+                         @Override
+                         public void onFinish() {
+                             progressDialog.dismiss();
+-                            Intent intent=new Intent(GioHangActivity.this,ThongTinKhachHang.class);
++                            Intent intent = new Intent(GioHangActivity.this, ThongTinKhachHang.class);
++                            // Convert the list of products to a JSON string
++                            Gson gson = new Gson();
++                            String productsJson = gson.toJson(MainActivity.gioHangArrayList);
++                            // Pass the JSON string as an extra with the intent
++                            intent.putExtra("ProductsJson", productsJson);
+                             intent.putExtra("TotalMoney", String.valueOf(txtTongTien.getText()));
+                             startActivity(intent);
+                         }
+                     }.start();
+-                }else {
+-                    CheckConnect.ShowToast_Short(getApplicationContext(),"Giỏ hàng của bạn chưa có sản phẩm");
++                } else {
++                    CheckConnect.ShowToast_Short(getApplicationContext(), "Giỏ hàng của bạn chưa có sản phẩm");
+                 }
+             }
+         });
++
+     }
+ 
+     private void Actionbar() {
+Index: app/src/main/java/com/example/appbanthietbidientu/Adapter/GioHangAdapter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/appbanthietbidientu/Adapter/GioHangAdapter.java b/app/src/main/java/com/example/appbanthietbidientu/Adapter/GioHangAdapter.java
+--- a/app/src/main/java/com/example/appbanthietbidientu/Adapter/GioHangAdapter.java	(revision Local Version)
++++ b/app/src/main/java/com/example/appbanthietbidientu/Adapter/GioHangAdapter.java	(revision Shelved Version)
+@@ -80,7 +80,7 @@
+         viewHolder.txtTenGioHang.setTypeface(semibold);
+         DecimalFormat decimalFormat=new DecimalFormat("###,###,###");
+         viewHolder.txtGiaGioHang.setText(decimalFormat.format(gioHang.getGiasp())+"₫");
+-        Picasso.with(context).load(gioHang.getHinhsp())
++        Picasso.get().load(gioHang.getHinhsp())
+                 .placeholder(R.drawable.loadimage)
+                 .error(R.drawable.errorimage)
+                 .into(viewHolder.imgGioHang);
+@@ -146,4 +146,6 @@
+ 
+         return view;
+     }
++
++
+ }
+Index: app/src/main/res/layout/item_donhang.xml
+===================================================================
+diff --git a/app/src/main/res/layout/item_donhang.xml b/app/src/main/res/layout/item_donhang.xml
+new file mode 100644
+--- /dev/null	(revision Shelved Version)
++++ b/app/src/main/res/layout/item_donhang.xml	(revision Shelved Version)
+@@ -0,0 +1,65 @@
++<LinearLayout
++    xmlns:android="http://schemas.android.com/apk/res/android"
++    android:layout_width="match_parent"
++    android:layout_height="wrap_content"
++    android:orientation="vertical"
++    android:padding="8dp">
++
++    <!-- Hàng 1 -->
++    <LinearLayout
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:orientation="horizontal">
++
++        <TextView
++            android:id="@+id/idDonHang"
++            android:layout_width="35dp"
++            android:layout_height="37dp"
++            android:layout_marginEnd="8dp"
++            android:src="@mipmap/ic_launcher" />
++
++        <TextView
++            android:id="@+id/idUser"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:text="ID Khách"
++            android:textSize="16sp" />
++
++        <TextView
++            android:id="@+id/idQt"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:textSize="16sp"
++            android:layout_marginStart="8dp"
++            android:text="Qt: 5" />
++
++        <TextView
++            android:id="@+id/idTotal"
++            android:layout_width="218dp"
++            android:layout_height="wrap_content"
++            android:layout_marginStart="8dp"
++            android:text="Total: $10"
++            android:textSize="16sp" />
++
++    </LinearLayout>
++<LinearLayout
++    android:layout_width="match_parent"
++    android:layout_height="wrap_content"
++    android:orientation="horizontal">
++    <!-- Hàng 2 -->
++    <TextView
++        android:id="@+id/idNgayDat"
++        android:layout_width="148dp"
++        android:layout_height="wrap_content"
++        android:layout_marginStart="8dp"
++        android:text="13/01/2024"
++        android:textSize="16sp" />
++</LinearLayout>
++    <TextView
++        android:id="@+id/idTrangThai"
++        android:layout_width="148dp"
++        android:layout_height="wrap_content"
++        android:layout_marginStart="15dp"
++        android:text="Trạng thái đơn hàng"
++        android:textSize="16sp" />
++</LinearLayout>
+Index: app/src/main/res/layout/item_giohang_sanphamchitiet.xml
+===================================================================
+diff --git a/app/src/main/res/layout/item_giohang_sanphamchitiet.xml b/app/src/main/res/layout/item_giohang_sanphamchitiet.xml
+new file mode 100644
+--- /dev/null	(revision Shelved Version)
++++ b/app/src/main/res/layout/item_giohang_sanphamchitiet.xml	(revision Shelved Version)
+@@ -0,0 +1,46 @@
++<LinearLayout
++    xmlns:android="http://schemas.android.com/apk/res/android"
++    android:layout_width="match_parent"
++    android:layout_height="wrap_content"
++    android:orientation="horizontal"
++    android:padding="8dp">
++
++    <ImageView
++        android:id="@+id/imageProduct"
++        android:layout_width="50dp"
++        android:layout_height="50dp"
++        android:layout_marginEnd="8dp"
++        android:src="@mipmap/ic_launcher" />
++
++    <TextView
++        android:id="@+id/textProductName"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:textSize="16sp"
++        android:text="Product Name" />
++
++    <TextView
++        android:id="@+id/textQuantity"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:textSize="16sp"
++        android:layout_marginStart="8dp"
++        android:text="Qt: 5" />
++
++    <TextView
++        android:id="@+id/textPrice"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:textSize="16sp"
++        android:layout_marginStart="8dp"
++        android:text="Price: $10" />
++
++    <TextView
++        android:id="@+id/textTotalPrice"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:textSize="16sp"
++        android:layout_marginStart="8dp"
++        android:text="Total Price: $50" />
++
++</LinearLayout>
+\ No newline at end of file
+Index: app/src/main/java/com/example/appbanthietbidientu/Activity/MainActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/appbanthietbidientu/Activity/MainActivity.java b/app/src/main/java/com/example/appbanthietbidientu/Activity/MainActivity.java
+--- a/app/src/main/java/com/example/appbanthietbidientu/Activity/MainActivity.java	(revision Local Version)
++++ b/app/src/main/java/com/example/appbanthietbidientu/Activity/MainActivity.java	(revision Shelved Version)
+@@ -128,6 +128,11 @@
+                         Intent live = new Intent(MainActivity.this, JoinActivity.class);
+                         startActivity(live);
+                         break;
++                    case 6:
++                        Intent quanlydonhang = new Intent(MainActivity.this, QuanLyDonHangActivity.class);
++                        quanlydonhang.putExtra("idloaidonhang", loaispArrayList.get(i).getId());
++                        startActivity(quanlydonhang);
++                        break;
+                 }
+             }
+         });
+@@ -165,7 +170,7 @@
+ 
+         for(int i=0;i<mangQuangCao.size();i++){
+             ImageView imageView=new ImageView(getApplicationContext());
+-            Picasso.with(MainActivity.this).load(mangQuangCao.get(i)).into(imageView);
++            Picasso.get().load(mangQuangCao.get(i)).into(imageView);
+             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+             viewFlipper.addView(imageView);
+         }
+@@ -226,7 +231,7 @@
+         loaispArrayList.add(3,new Loaisp(0,"Liên Hệ",R.drawable.ic_action_contact));
+         loaispArrayList.add(4,new Loaisp(0,"Thông Tin", R.drawable.ic_action_infor));
+         loaispArrayList.add(5,new Loaisp(0,"Livestream",R.drawable.live));
+-        loaispArrayList.add(6,new Loaisp(0,"Quản lý doanh thu",R.drawable.ic_action_infor));
++        loaispArrayList.add(6,new Loaisp(0,"Quản lý đơn hàng",R.drawable.ic_action_infor));
+ 
+         LoaispAdapter loaispAdapter=new LoaispAdapter(loaispArrayList,MainActivity.this);
+         listManHinhChinh.setAdapter(loaispAdapter);
+Index: app/src/main/java/com/example/appbanthietbidientu/Activity/PayPal.java
+===================================================================
+diff --git a/app/src/main/java/com/example/appbanthietbidientu/Activity/PayPal.java b/app/src/main/java/com/example/appbanthietbidientu/Activity/PayPal.java
+new file mode 100644
+--- /dev/null	(revision Shelved Version)
++++ b/app/src/main/java/com/example/appbanthietbidientu/Activity/PayPal.java	(revision Shelved Version)
+@@ -0,0 +1,29 @@
++package com.example.appbanthietbidientu.Activity;
++
++import android.app.Application;
++import android.os.Build;
++
++import androidx.appcompat.app.AppCompatActivity;
++
++import com.paypal.checkout.PayPalCheckout;
++import com.paypal.checkout.config.CheckoutConfig;
++import com.paypal.checkout.config.Environment;
++import com.paypal.checkout.createorder.CurrencyCode;
++import com.paypal.checkout.createorder.UserAction;
++
++public class PayPal extends Application {
++    @Override
++    public void onCreate() {
++        super.onCreate();
++        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
++            PayPalCheckout.setConfig(new CheckoutConfig(
++                    this,
++                    "AYTnvL4KGi4jYP7QsasL4X0FT5en-6VUSBOUHbAsmXAkxdbK7-nfzXfP5dZg6ysC_Q4AaqNr4XWKVdsr",
++                    Environment.SANDBOX,
++                    CurrencyCode.USD,
++                    UserAction.PAY_NOW,
++                    "com.example.appbanthietbidientu://paypalpay"
++            ));
++        }
++    }
++}
+Index: app/src/main/java/com/example/appbanthietbidientu/Activity/QuanLyDonHangActivity.java
+===================================================================
+diff --git a/app/src/main/java/com/example/appbanthietbidientu/Activity/QuanLyDonHangActivity.java b/app/src/main/java/com/example/appbanthietbidientu/Activity/QuanLyDonHangActivity.java
+new file mode 100644
+--- /dev/null	(revision Shelved Version)
++++ b/app/src/main/java/com/example/appbanthietbidientu/Activity/QuanLyDonHangActivity.java	(revision Shelved Version)
+@@ -0,0 +1,335 @@
++package com.example.appbanthietbidientu.Activity;
++
++import android.annotation.SuppressLint;
++import android.app.SearchManager;
++import android.content.Intent;
++import android.database.Cursor;
++import android.os.Bundle;
++import android.util.Log;
++import android.view.LayoutInflater;
++import android.view.Menu;
++import android.view.MenuItem;
++import android.view.View;
++import android.widget.AdapterView;
++import android.widget.ListAdapter;
++import android.widget.ListView;
++import android.widget.ProgressBar;
++import android.widget.Toast;
++
++import androidx.annotation.NonNull;
++import androidx.appcompat.widget.SearchView;
++import androidx.appcompat.widget.Toolbar;
++
++import com.example.appbanthietbidientu.Adapter.DonHangAdapter;
++import com.example.appbanthietbidientu.Adapter.DonhangmoiAdapter;
++import com.example.appbanthietbidientu.Adapter.SanphammoiAdapter;
++import com.example.appbanthietbidientu.R;
++import com.example.appbanthietbidientu.model.DonHang;
++import com.example.appbanthietbidientu.model.GioHang;
++import com.example.appbanthietbidientu.model.Sanpham;
++import com.example.appbanthietbidientu.ultil.ApiSp;
++import com.example.appbanthietbidientu.ultil.BaseFunctionActivity;
++import com.example.appbanthietbidientu.ultil.CheckConnect;
++import com.google.firebase.database.DataSnapshot;
++import com.google.firebase.database.DatabaseError;
++import com.google.firebase.database.DatabaseReference;
++import com.google.firebase.database.FirebaseDatabase;
++import com.google.firebase.database.ValueEventListener;
++import com.google.gson.Gson;
++
++import java.util.ArrayList;
++import java.util.List;
++import java.util.Map;
++import java.util.Objects;
++
++import retrofit2.Call;
++import retrofit2.Callback;
++import retrofit2.Response;
++
++public class QuanLyDonHangActivity extends BaseFunctionActivity {
++    SearchView searchView;
++    Toolbar toolbarQuanLyDonHang;
++    ProgressBar loadDonHang;
++    ListView listViewDonHang;
++    ArrayList<DonHang> donHangArrayList;
++    DonHangAdapter donHangAdapter;
++    View footerView;
++    private DatabaseReference mDatabase,m1Database;
++    int page = 1;
++    boolean isLoading = false;
++    boolean limitData = false;
++//    mHander mHander;
++
++    @Override
++    protected void onCreate(Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++        setContentView(R.layout.activity_admin_quanlydonhang);
++        if (CheckConnect.haveNetworkConnected(getApplicationContext())) {
++            Khaibao();
++            ActionBar();
++            getData();
++        } else {
++            CheckConnect.ShowToast_Short(getApplicationContext(), "Error Connect Internet");
++        }
++
++        listViewDonHang.setOnItemClickListener(new AdapterView.OnItemClickListener() {
++            @Override
++            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
++                // Lấy thông tin của đơn hàng đã chọn
++                DonHang selectedDonHang = donHangArrayList.get(i);
++
++                // Log thông tin của đơn hàng đã chọn
++                        Log.d("Selected Don Hang", selectedDonHang.getId().toString());
++
++// Tạo Intent và đưa thông tin đơn hàng vào Bundle
++                Intent intent = new Intent(getApplicationContext(), ChiTietDonHangActivity.class);
++                intent.putExtra("idDonHang",selectedDonHang.getId());
++
++// Chuyển sang activity ChiTietDonHangActivity
++                startActivity(intent);
++
++            }
++        });
++
++
++    }
++
++    private void getData() {
++        // Khởi tạo FirebaseApp (chỉ cần thực hiện một lần trong ứng dụng)
++        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
++
++        // Tham chiếu đến nút trong cơ sở dữ liệu Firebase Realtime
++        mDatabase = FirebaseDatabase.getInstance().getReference("donhang");
++
++        // Lắng nghe sự kiện thay đổi dữ liệu trên Firebase Realtime Database
++        mDatabase.addValueEventListener(new ValueEventListener() {
++            @Override
++            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
++                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
++                    // Lấy dữ liệu của mỗi đơn hàng
++                    Map<String, Object> donHangData = (Map<String, Object>) snapshot.getValue();
++                    assert donHangData != null;
++
++                    // Lấy các thông tin của đơn hàng
++                    String thoigian = donHangData.get("thoigian").toString();
++                    int total = Integer.parseInt(donHangData.get("total").toString());
++                    String trangthai = donHangData.get("trangthai").toString();
++                    String user = donHangData.get("user").toString();
++
++                    // Khởi tạo đối tượng DonHang
++                    DonHang donHang = new DonHang();
++                    donHang.setId(snapshot.getKey());
++                    donHang.setTotal(total);
++                    donHang.setUser(user);
++                    donHang.setTrangThai(trangthai);
++                    donHang.setThoiGian(Long.parseLong(thoigian));
++
++                    // Hiển thị thông tin đơn hàng
++                    Log.d("Firebase Data", "Don Hang ID: " + snapshot.getKey());
++
++                    // Lấy danh sách sản phẩm của đơn hàng
++                    DatabaseReference dssanphamRef = FirebaseDatabase.getInstance().getReference("donhang").child(snapshot.getKey()).child("dssanpham");
++                    dssanphamRef.addListenerForSingleValueEvent(new ValueEventListener() {
++                        @Override
++                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
++                            ArrayList<GioHang> gioHangList = new ArrayList<>();
++
++                            for (DataSnapshot gioHangSnapshot : dataSnapshot.getChildren()) {
++                                // Lấy thông tin của mỗi sản phẩm từ dataSnapshot
++                                String tenSP = gioHangSnapshot.child("tensp").getValue(String.class);
++                                int giaSP = gioHangSnapshot.child("giasp").getValue(Integer.class);
++                                int soLuong = gioHangSnapshot.child("soluongsp").getValue(Integer.class);
++                                String hinhSP = gioHangSnapshot.child("hinhsp").getValue(String.class);
++                                int idSP = gioHangSnapshot.child("idsp").getValue(Integer.class);
++
++                                // Tạo đối tượng GioHang từ thông tin sản phẩm
++                                GioHang gioHang = new GioHang();
++                                gioHang.setIdsp(idSP);
++                                gioHang.setTensp(tenSP);
++                                gioHang.setGiasp(giaSP);
++                                gioHang.setSoluongsp(soLuong);
++                                gioHang.setHinhsp(hinhSP);
++
++                                // Thêm sản phẩm vào danh sách gioHangList
++                                gioHangList.add(gioHang);
++                            }
++
++                            // Gán danh sách sản phẩm vào đơn hàng
++                            donHang.setDanhSachSanPham(gioHangList);
++
++                            // Hiển thị danh sách sản phẩm của đơn hàng
++                            Log.d("Firebase Data", "Gio Hang: " + gioHangList);
++
++                            // Thêm đơn hàng vào danh sách donHangArrayList
++                            donHangArrayList.add(donHang);
++
++                            // Chuyển đổi thành chuỗi JSON
++                            String json = new Gson().toJson(donHangData);
++
++                            // Log ra thông tin của đơn hàng
++                            Log.d("Firebase Data", "DonHang: " + donHangArrayList);
++                            DonhangmoiAdapter donhangmoiAdapter=new DonhangmoiAdapter(donHangArrayList, getApplicationContext());
++                            donHangAdapter = new DonHangAdapter(new ArrayList<>(donHangArrayList), getApplicationContext());
++                            listViewDonHang.setAdapter(donHangAdapter);
++                        }
++
++                        @Override
++                        public void onCancelled(@NonNull DatabaseError databaseError) {
++                            // Xử lý khi có lỗi xảy ra
++                        }
++                    });
++                }
++            }
++
++            @Override
++            public void onCancelled(@NonNull DatabaseError databaseError) {
++                // Xử lý khi có lỗi xảy ra
++                Toast.makeText(getApplicationContext(), "Lỗi khi tải dữ liệu", Toast.LENGTH_SHORT).show();
++            }
++        });
++    }
++
++
++
++    private void ActionBar() {
++
++        setSupportActionBar(toolbarQuanLyDonHang);
++        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
++        toolbarQuanLyDonHang.setNavigationIcon(R.drawable.ic_action_back);
++
++        toolbarQuanLyDonHang.setNavigationOnClickListener(new View.OnClickListener() {
++            @Override
++            public void onClick(View view) {
++                finish();
++            }
++        });
++    }
++
++    @Override
++    public boolean onCreateOptionsMenu(Menu menu) {
++//        getMenuInflater().inflate(R.menu.menu, menu);
++        getMenuInflater().inflate(R.menu.search, menu);
++        searchView = (SearchView) menu.findItem(R.id.ic_search).getActionView();
++        searchView.setMaxWidth(Integer.MAX_VALUE);
++
++        searchView.setOnSuggestionListener(new SearchView.OnSuggestionListener() {
++            @Override
++            public boolean onSuggestionSelect(int position) {
++                return false;
++            }
++
++            @SuppressLint("Range")
++            @Override
++            public boolean onSuggestionClick(int position) {
++                Cursor cursor = (Cursor) searchView.getSuggestionsAdapter().getItem(position);
++                searchView.setQuery(cursor.getString(cursor.getColumnIndex(SearchManager.SUGGEST_COLUMN_TEXT_1)), false);
++                return false;
++            }
++        });
++
++        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
++            @Override
++            public boolean onQueryTextSubmit(String query) {
++                donHangAdapter.getFilter().filter(query);
++                return false;
++            }
++
++            @Override
++            public boolean onQueryTextChange(String newText) {
++                donHangAdapter.getFilter().filter(newText);
++                return false;
++            }
++        });
++
++        return true;
++    }
++
++    @Override
++    public void onBackPressed() {
++        if (!searchView.isIconified()) {
++            searchView.setIconified(true);
++            return;
++        }
++        super.onBackPressed();
++    }
++
++//    @Override
++//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
++//        switch (item.getItemId()) {
++//            case R.id.iconGioHang:
++//                Intent intent = new Intent(getApplicationContext(), GioHangActivity.class);
++//                startActivity(intent);
++//                break;
++//        }
++//        return super.onOptionsItemSelected(item);
++//    }
++
++    private void Khaibao() {
++        loadDonHang = findViewById(R.id.loadDonHang);
++        toolbarQuanLyDonHang = findViewById(R.id.ToolbarQuanLyDonHang);
++        listViewDonHang = findViewById(R.id.listviewDonHang);
++
++        donHangArrayList = new ArrayList<DonHang>();
++        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
++        footerView = inflater.inflate(R.layout.loading_layout, null);
++    }
++}
++
++//import android.os.Bundle;
++//import android.util.Log;
++//import android.widget.Toast;
++//
++//import androidx.annotation.NonNull;
++//import androidx.appcompat.app.AppCompatActivity;
++//
++//import com.example.appbanthietbidientu.R;
++//import com.example.appbanthietbidientu.model.DonHang;
++//import com.google.firebase.database.DataSnapshot;
++//import com.google.firebase.database.DatabaseError;
++//import com.google.firebase.database.DatabaseReference;
++//import com.google.firebase.database.FirebaseDatabase;
++//import com.google.firebase.database.ValueEventListener;
++//import com.google.gson.Gson;
++//
++//import java.util.Map;
++//
++//public class QuanLyDonHangActivity extends AppCompatActivity {
++//    private DatabaseReference mDatabase;
++//
++//    @Override
++//    protected void onCreate(Bundle savedInstanceState) {
++//        Log.d("BBBBBBBBBBBBBBBB", "Lấy tới đây: ");
++//        super.onCreate(savedInstanceState);
++//
++//        // Khởi tạo FirebaseApp (chỉ cần thực hiện một lần trong ứng dụng)
++//        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
++//
++//        // Tham chiếu đến nút trong cơ sở dữ liệu Firebase Realtime
++//        mDatabase = FirebaseDatabase.getInstance().getReference("donhang");
++//
++//        // Lắng nghe sự kiện thay đổi dữ liệu trên Firebase Realtime Database
++//        mDatabase.addValueEventListener(new ValueEventListener() {
++//            @Override
++//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
++//                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
++//                    // Lấy dữ liệu của mỗi đơn hàng
++//                    Map<String, Object> donHangData = (Map<String, Object>) snapshot.getValue();
++//
++//                    // Chuyển đổi thành chuỗi JSON
++//                    String json = new Gson().toJson(donHangData);
++//
++//                    // Log ra chuỗi JSON
++//                    Log.d("Firebase Data", "JSON: " + json);
++//                }
++//            }
++//
++//            @Override
++//            public void onCancelled(@NonNull DatabaseError databaseError) {
++//                // Xử lý khi có lỗi xảy ra
++//                Toast.makeText(getApplicationContext(), "Lỗi khi tải dữ liệu", Toast.LENGTH_SHORT).show();
++//            }
++//        });
++//
++//
++//    }
++//}
+Index: app/src/main/java/com/example/appbanthietbidientu/response/RetrofitClient.java
+===================================================================
+diff --git a/app/src/main/java/com/example/appbanthietbidientu/response/RetrofitClient.java b/app/src/main/java/com/example/appbanthietbidientu/response/RetrofitClient.java
+new file mode 100644
+--- /dev/null	(revision Shelved Version)
++++ b/app/src/main/java/com/example/appbanthietbidientu/response/RetrofitClient.java	(revision Shelved Version)
+@@ -0,0 +1,19 @@
++package com.example.appbanthietbidientu.response;
++
++import retrofit2.Retrofit;
++import retrofit2.converter.gson.GsonConverterFactory;
++
++public class RetrofitClient {
++    private static final String BASE_URL = "https://api.exchangeratesapi.io/";
++    private static Retrofit retrofit = null;
++
++    public static Retrofit getClient() {
++        if (retrofit == null) {
++            retrofit = new Retrofit.Builder()
++                    .baseUrl(BASE_URL)
++                    .addConverterFactory(GsonConverterFactory.create())
++                    .build();
++        }
++        return retrofit;
++    }
++}
+Index: app/src/main/java/com/example/appbanthietbidientu/Adapter/SanphamAdapter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/appbanthietbidientu/Adapter/SanphamAdapter.java b/app/src/main/java/com/example/appbanthietbidientu/Adapter/SanphamAdapter.java
+--- a/app/src/main/java/com/example/appbanthietbidientu/Adapter/SanphamAdapter.java	(revision Local Version)
++++ b/app/src/main/java/com/example/appbanthietbidientu/Adapter/SanphamAdapter.java	(revision Shelved Version)
+@@ -101,7 +101,7 @@
+         viewHolder.motaDienThoai.setMaxLines(2);
+         viewHolder.motaDienThoai.setEllipsize(TextUtils.TruncateAt.END);
+         viewHolder.motaDienThoai.setText(dienThoai.getMotasanpham());
+-        Picasso.with(context).load(dienThoai.getHinhanhsanpham())
++        Picasso.get().load(dienThoai.getHinhanhsanpham())
+                 .placeholder(R.drawable.loadimage)
+                 .error(R.drawable.errorimage)
+                 .into(viewHolder.hinhAnhDienThoai);
+Index: app/src/main/java/com/example/appbanthietbidientu/Adapter/SanphammoiAdapter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/appbanthietbidientu/Adapter/SanphammoiAdapter.java b/app/src/main/java/com/example/appbanthietbidientu/Adapter/SanphammoiAdapter.java
+--- a/app/src/main/java/com/example/appbanthietbidientu/Adapter/SanphammoiAdapter.java	(revision Local Version)
++++ b/app/src/main/java/com/example/appbanthietbidientu/Adapter/SanphammoiAdapter.java	(revision Shelved Version)
+@@ -50,7 +50,7 @@
+         Typeface semibold = ResourcesCompat.getFont(context,R.font.svn_gilroy_semibold);
+         holder.txtTensp.setTypeface(semibold);
+ 
+-        Picasso.with(context).load(sanpham.getHinhanhsanpham())
++        Picasso.get().load(sanpham.getHinhanhsanpham())
+                 .placeholder(R.drawable.loadimage)
+                 .error(R.drawable.errorimage)
+                 .into(holder.imgSp);
+Index: settings.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/settings.gradle b/settings.gradle
+--- a/settings.gradle	(revision Local Version)
++++ b/settings.gradle	(revision Shelved Version)
+@@ -14,6 +14,15 @@
+ 
+ //        livestream repo
+         maven { url "https://maven.aliyun.com/repository/jcenter" }
++
++        // PAYPAL
++        maven {
++            url  "https://cardinalcommerceprod.jfrog.io/artifactory/android"
++            credentials {
++                username "paypal_sgerritz"
++                password "AKCp8jQ8tAahqpT5JjZ4FRP2mW7GMoFZ674kGqHmupTesKeAY2G8NcmPKLuTxTGkKjDLRzDUQ"
++            }
++        }
+     }
+ }
+ rootProject.name = "AppBanThietBiDienTu"
+Index: app/src/main/java/com/example/appbanthietbidientu/Activity/ThongTinKhachHang.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/appbanthietbidientu/Activity/ThongTinKhachHang.java b/app/src/main/java/com/example/appbanthietbidientu/Activity/ThongTinKhachHang.java
+--- a/app/src/main/java/com/example/appbanthietbidientu/Activity/ThongTinKhachHang.java	(revision Local Version)
++++ b/app/src/main/java/com/example/appbanthietbidientu/Activity/ThongTinKhachHang.java	(revision Shelved Version)
+@@ -2,20 +2,60 @@
+ 
+ import android.app.ProgressDialog;
+ import android.content.Intent;
++import android.os.Build;
+ import android.os.Bundle;
+ import android.os.CountDownTimer;
++import android.util.Log;
+ import android.view.View;
+ import android.widget.EditText;
+ import android.widget.TextView;
+ import android.widget.Toast;
+ 
++import androidx.annotation.NonNull;
+ import androidx.appcompat.app.AppCompatActivity;
+ import androidx.appcompat.widget.Toolbar;
+ 
+ import com.example.appbanthietbidientu.R;
++import com.example.appbanthietbidientu.model.ExchangeRateResponse;
++import com.example.appbanthietbidientu.model.GioHang;
++import com.example.appbanthietbidientu.model.Sanpham;
++import com.example.appbanthietbidientu.response.RetrofitClient;
+ import com.example.appbanthietbidientu.response.SignInResponse;
+ import com.example.appbanthietbidientu.ultil.ApiSp;
+ import com.example.appbanthietbidientu.ultil.CheckConnect;
++import com.example.appbanthietbidientu.ultil.ExchangeRateService;
++import com.google.android.gms.tasks.OnFailureListener;
++import com.google.android.gms.tasks.OnSuccessListener;
++import com.google.common.reflect.TypeToken;
++import com.google.firebase.database.DataSnapshot;
++import com.google.firebase.database.DatabaseError;
++import com.google.firebase.database.DatabaseReference;
++import com.google.firebase.database.FirebaseDatabase;
++import com.google.firebase.database.ValueEventListener;
++import com.google.gson.Gson;
++import com.paypal.checkout.approve.Approval;
++import com.paypal.checkout.approve.OnApprove;
++import com.paypal.checkout.createorder.CreateOrder;
++import com.paypal.checkout.createorder.CreateOrderActions;
++import com.paypal.checkout.createorder.CurrencyCode;
++import com.paypal.checkout.createorder.OrderIntent;
++import com.paypal.checkout.createorder.UserAction;
++import com.paypal.checkout.order.Amount;
++import com.paypal.checkout.order.AppContext;
++import com.paypal.checkout.order.CaptureOrderResult;
++import com.paypal.checkout.order.OnCaptureComplete;
++import com.paypal.checkout.order.OrderRequest;
++import com.paypal.checkout.order.PurchaseUnit;
++import com.paypal.checkout.paymentbutton.PaymentButtonContainer;
++
++import org.jetbrains.annotations.NotNull;
++
++import java.text.DecimalFormat;
++import java.time.LocalDateTime;
++import java.time.ZoneId;
++import java.util.ArrayList;
++import java.util.HashMap;
++import java.util.Map;
+ 
+ import okhttp3.MediaType;
+ import okhttp3.RequestBody;
+@@ -23,11 +63,14 @@
+ import retrofit2.Callback;
+ import retrofit2.Response;
+ 
++
+ public class ThongTinKhachHang extends AppCompatActivity {
+     Toolbar toolbarThongTinKhachHang;
+     EditText NhapTenKhachHang,NhapSoDienThoai,NhapEmail;
+     TextView XacNhan,Huy,txtThanhToanTien;
+     ProgressDialog progressDialog;
++    PaymentButtonContainer paymentButtonContainer;
++    private static final String TAG = "MyTag";
+ 
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+@@ -116,6 +159,8 @@
+ 
+               }
+         });
++
++
+     }
+ 
+     private void Actionbar() {
+@@ -138,12 +183,154 @@
+         XacNhan = findViewById(R.id.XacNhan);
+         Huy = findViewById(R.id.Huy);
+         txtThanhToanTien = findViewById(R.id.txtThanhToanTien);
++        // Thêm đoạn mã sau đây
++        paymentButtonContainer = findViewById(R.id.payment_button_container);
+ 
+         String nd = getIntent().getStringExtra("TotalMoney");
++// Remove the comma and the currency symbol before parsing
++        nd = nd.replaceAll("[,₫]", "");
++        thanhtoan(nd);
++
+ 
+         txtThanhToanTien.setText("Thanh toán số tiền: "+nd);
+     }
+ 
++    private void thanhtoan(String nd) {
++        double amountVND = Double.parseDouble(nd);
++        // Assuming 25000 is the exchange rate from VND to USD
++        double exchangeRate = 25000;
++        double amountUSD = amountVND / exchangeRate;
++        // Format the amountUSD to have only two decimal places
++        DecimalFormat decimalFormat = new DecimalFormat("#0.00");
++        String formattedAmountUSD = decimalFormat.format(amountUSD);
++
++        // Retrieve the JSON string extra from the intent
++        String productsJson = getIntent().getStringExtra("ProductsJson");
++        // Deserialize the JSON string into a list of products
++        Gson gson = new Gson();
++        ArrayList<GioHang> products = gson.fromJson(productsJson, new TypeToken<ArrayList<GioHang>>(){}.getType());
++
++        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
++            paymentButtonContainer.setup(
++                    new CreateOrder() {
++                        @Override
++                        public void create(@NotNull CreateOrderActions createOrderActions) {
++                            ArrayList<PurchaseUnit> purchaseUnits = new ArrayList<>();
++                            purchaseUnits.add(
++                                    new PurchaseUnit.Builder()
++                                            .amount(
++                                                    new Amount.Builder()
++                                                            .currencyCode(CurrencyCode.USD)
++                                                            .value(formattedAmountUSD)
++                                                            .build()
++                                            )
++                                            .build()
++                            );
++                            OrderRequest order = new OrderRequest(
++                                    OrderIntent.CAPTURE,
++                                    new AppContext.Builder()
++                                            .userAction(UserAction.PAY_NOW)
++                                            .build(),
++                                    purchaseUnits
++                            );
++                            createOrderActions.create(order, (CreateOrderActions.OnOrderCreated) null);
++                        }
++                    },
++                    new OnApprove() {
++                        @Override
++                        public void onApprove(@NotNull Approval approval) {
++                            approval.getOrderActions().capture(new OnCaptureComplete() {
++                                @Override
++                                public void onCaptureComplete(@NotNull CaptureOrderResult result) {
++                                    Log.d(TAG, String.format("CaptureOrderResult: %s", result));
++
++                                    // Create a Firebase database reference
++                                    // Tham chiếu đến node "donhang"
++                                    DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference().child("donhang");
++
++// Lấy số lượng phần tử hiện có trong node "donhang"
++                                    databaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
++                                        @Override
++                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
++                                            // Lấy số lượng phần tử hiện có
++                                            long orderCount = dataSnapshot.getChildrenCount();
++
++                                            // Tạo một key tự động cho đơn hàng mới
++                                            String newOrderKey = String.valueOf(orderCount);
++
++                                            // Tạo dữ liệu cho đơn hàng mới
++                                            Map<String, Object> orderData = new HashMap<>();
++                                            orderData.put("user", "5");
++                                            orderData.put("total", amountVND);
++
++                                            // Thêm các sản phẩm vào đơn hàng mới
++                                            Map<String, Object> productsData = new HashMap<>();
++                                            for (int i = 0; i < products.size(); i++) {
++                                                GioHang product = products.get(i);
++                                                Map<String, Object> productData = new HashMap<>();
++                                                productData.put("idsp", product.getIdsp());
++                                                productData.put("tensp", product.getTensp());
++                                                productData.put("soluongsp", product.getSoluongsp());
++                                                productData.put("giasp", product.getGiasp());
++                                                productData.put("hinhsp", product.getHinhsp());
++                                                productsData.put(String.valueOf(i), productData);
++                                            }
++                                            orderData.put("dssanpham", productsData);
++
++                                            // Lấy thời gian hiện tại
++                                            LocalDateTime currentTime;
++                                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
++                                                currentTime = LocalDateTime.now();
++                                                long timestamp = currentTime.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
++                                                orderData.put("thoigian", timestamp);
++                                            }
++
++                                            // Đặt trạng thái của đơn hàng
++                                            orderData.put("trangthai", "Da Thanh Toan");
++
++                                            // Đẩy dữ liệu của đơn hàng mới lên Firebase với key mới
++                                            databaseRef.child(newOrderKey).setValue(orderData)
++                                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
++                                                        @Override
++                                                        public void onSuccess(Void aVoid) {
++                                                            Log.d(TAG, "Order successfully added to Firebase");
++                                                            Toast.makeText(ThongTinKhachHang.this, "Order successfully placed", Toast.LENGTH_SHORT).show();
++                                                        }
++                                                    })
++                                                    .addOnFailureListener(new OnFailureListener() {
++                                                        @Override
++                                                        public void onFailure(@NonNull Exception e) {
++                                                            Log.e(TAG, "Error adding order to Firebase", e);
++                                                            Toast.makeText(ThongTinKhachHang.this, "Failed to place order", Toast.LENGTH_SHORT).show();
++                                                        }
++                                                    });
++                                        }
++
++                                        @Override
++                                        public void onCancelled(@NonNull DatabaseError databaseError) {
++                                            // Xử lý khi có lỗi xảy ra
++                                            Log.e(TAG, "Error accessing database: " + databaseError.getMessage());
++                                            Toast.makeText(ThongTinKhachHang.this, "Failed to access database", Toast.LENGTH_SHORT).show();
++                                        }
++                                    });
++
++
++
++                                }
++                            });
++
++                        }
++                    }
++            );
++        }
++    }
++
++
++
++
++
++
++
+     @Override
+     public void finish() {
+         super.finish();

@@ -1,6 +1,7 @@
 package com.example.appbanthietbidientu.ultil;
 
 import com.example.appbanthietbidientu.model.Comment;
+import com.example.appbanthietbidientu.model.DonHang;
 import com.example.appbanthietbidientu.model.MessageModel;
 import com.example.appbanthietbidientu.model.Sanpham;
 import com.example.appbanthietbidientu.response.SignInResponse;
@@ -59,6 +60,10 @@ public interface ApiSp {
     @GET("laptop.json")
     Call<List<Sanpham>> getlistLapTop();
 
+    @GET("donhang.json")
+    Call<List<DonHang>> getlistDonHang();
+
+
     @Multipart
     @POST("thongtinkhachhang.php")
     Call<SignInResponse> getThongTinKhachHang(@Part(Const.KEY_USERNAME) RequestBody tenkhachhang,
@@ -68,6 +73,15 @@ public interface ApiSp {
     @POST("comment.json")
     Call<Void> postComment(@Body Comment newComment);
 
+
+    @POST("sanphammoinhat.json")
+    Call<Sanpham> addSanPham(@Body Sanpham sanpham);
+
+    @PUT("sanphammoinhat/{id}.json")
+    Call<Void> updateSanPham(@Path("id") String id, @Body Sanpham sanpham);
+
+    @DELETE("sanphammoinhat/{id}.json")
+    Call<Void> deleteSanPham(@Path("id") String id);
     @POST("sanphammoinhat.json") // Endpoint để thêm sản phẩm
     Call<Void> insertSp(@Body Sanpham sanpham,  @Path("id") String id);
 
