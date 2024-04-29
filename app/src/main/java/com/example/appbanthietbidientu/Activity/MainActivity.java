@@ -35,6 +35,7 @@ import com.example.appbanthietbidientu.model.Sanpham;
 import com.example.appbanthietbidientu.ultil.ApiSp;
 import com.example.appbanthietbidientu.ultil.CheckConnect;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -61,7 +62,7 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
         Khaibao();
@@ -128,6 +129,10 @@ public class MainActivity extends AppCompatActivity{
                         Intent live = new Intent(MainActivity.this, JoinActivity.class);
                         startActivity(live);
                         break;
+                    case 6:
+                        Intent quanlydonhang = new Intent(MainActivity.this, QuanLyDonHangActivity.class);
+                        startActivity(quanlydonhang);
+                        break;
                 }
             }
         });
@@ -165,7 +170,7 @@ public class MainActivity extends AppCompatActivity{
 
         for(int i=0;i<mangQuangCao.size();i++){
             ImageView imageView=new ImageView(getApplicationContext());
-            Picasso.with(MainActivity.this).load(mangQuangCao.get(i)).into(imageView);
+            Picasso.get().load(mangQuangCao.get(i)).into(imageView);
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             viewFlipper.addView(imageView);
         }
@@ -226,7 +231,7 @@ public class MainActivity extends AppCompatActivity{
         loaispArrayList.add(3,new Loaisp(0,"Liên Hệ",R.drawable.ic_action_contact));
         loaispArrayList.add(4,new Loaisp(0,"Thông Tin", R.drawable.ic_action_infor));
         loaispArrayList.add(5,new Loaisp(0,"Livestream",R.drawable.live));
-        loaispArrayList.add(6,new Loaisp(0,"Quản lý doanh thu",R.drawable.ic_action_infor));
+        loaispArrayList.add(6,new Loaisp(0,"Quản lý đơn hàng",R.drawable.ic_action_infor));
 
         LoaispAdapter loaispAdapter=new LoaispAdapter(loaispArrayList,MainActivity.this);
         listManHinhChinh.setAdapter(loaispAdapter);

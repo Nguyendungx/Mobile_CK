@@ -1,6 +1,7 @@
 package com.example.appbanthietbidientu.ultil;
 
 import com.example.appbanthietbidientu.model.Comment;
+import com.example.appbanthietbidientu.model.DonHang;
 import com.example.appbanthietbidientu.model.Sanpham;
 import com.example.appbanthietbidientu.response.SignInResponse;
 import com.google.gson.Gson;
@@ -54,6 +55,10 @@ public interface ApiSp {
 
     @GET("laptop.json")
     Call<List<Sanpham>> getlistLapTop();
+
+    @GET("donhang.json")
+    Call<List<DonHang>> getlistDonHang();
+
 
     @Multipart
     @POST("thongtinkhachhang.php")
