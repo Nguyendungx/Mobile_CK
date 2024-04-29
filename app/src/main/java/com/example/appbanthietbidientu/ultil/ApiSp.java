@@ -1,6 +1,7 @@
 package com.example.appbanthietbidientu.ultil;
 
 import com.example.appbanthietbidientu.model.Comment;
+import com.example.appbanthietbidientu.model.MessageModel;
 import com.example.appbanthietbidientu.model.Sanpham;
 import com.example.appbanthietbidientu.response.SignInResponse;
 import com.google.gson.Gson;
@@ -8,14 +9,17 @@ import com.google.gson.GsonBuilder;
 
 import java.util.List;
 
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -63,4 +67,19 @@ public interface ApiSp {
 
     @POST("comment.json")
     Call<Void> postComment(@Body Comment newComment);
+
+    @POST("sanphammoinhat.json") // Endpoint để thêm sản phẩm
+    Call<Void> insertSp(@Body Sanpham sanpham,  @Path("id") String id);
+
+    @PUT("sanphammoinhat/{id}.json") // Endpoint để cập nhật sản phẩm
+    Call<Void> updateSp(@Body Sanpham sanpham, @Path("id") String id);
+
+    @DELETE("sanphammoinhat/{id}.json") // Endpoint để xóa sản phẩm
+    Call<Void> xoaSanPham(@Path("id") String id);
+
+    @Multipart
+    @POST("uploadFile")
+    Call<MessageModel> uploadFile(@Part MultipartBody.Part file);
+
+
 }
