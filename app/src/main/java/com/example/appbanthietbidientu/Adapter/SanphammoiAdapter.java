@@ -16,6 +16,7 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appbanthietbidientu.Activity.ChiTietSanPhamActivity;
+import com.example.appbanthietbidientu.Activity.SanPhamManager;
 import com.example.appbanthietbidientu.R;
 import com.example.appbanthietbidientu.model.Sanpham;
 import com.example.appbanthietbidientu.model.Sanphammoi;
@@ -32,6 +33,32 @@ public class SanphammoiAdapter extends RecyclerView.Adapter<SanphammoiAdapter.Sa
     public SanphammoiAdapter(List<Sanpham> sanphamList, Context context) {
         this.sanphamList = sanphamList;
         this.context = context;
+    }
+
+    public void addSanPham(Sanpham body) {
+        SanphammoiAdapter sanphammoiAdapter = new SanphammoiAdapter(sanphamList, context);
+        SanPhamManager sanphamManager = new SanPhamManager(sanphammoiAdapter, context);
+        // Thêm sản phẩm
+        Sanpham newSanpham = new Sanpham(0, "Tên sản phẩm", 10000, "URL_hình_ảnh", "Mô tả sản phẩm", 0);
+        sanphamManager.addSanPham(newSanpham);
+    }
+
+    public void updateSanPham(int position, Sanpham sanpham) {
+        SanphammoiAdapter sanphammoiAdapter = new SanphammoiAdapter(sanphamList, context);
+        SanPhamManager sanphamManager = new SanPhamManager(sanphammoiAdapter, context);
+        // Sửa sản phẩm
+        Sanpham updatedSanpham = sanphamList.get(position);
+        updatedSanpham.setTensanpham("Tên sản phẩm mới");
+        updatedSanpham.setGiasanpham(20000); // Giả sử giá mới là 20000
+        sanphamManager.updateSanPham(position, updatedSanpham);
+    }
+
+    public void deleteSanPham(int position) {
+        SanphammoiAdapter sanphammoiAdapter = new SanphammoiAdapter(sanphamList, context);
+        SanPhamManager sanphamManager = new SanPhamManager(sanphammoiAdapter, context);
+        // Xóa sản phẩm
+        Sanpham sanphamToDelete = sanphamList.get(position);
+        sanphamManager.deleteSanPham(position, sanphamToDelete);
     }
 
     @NonNull
