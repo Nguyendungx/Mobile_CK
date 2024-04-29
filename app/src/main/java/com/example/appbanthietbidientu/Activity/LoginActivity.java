@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -57,6 +58,8 @@ public class LoginActivity extends AppCompatActivity {
                 register();
             }
         });
+
+
     }
 
     private void register() {
@@ -124,6 +127,11 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void forgotPasswordClicked(View v){
+        Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+        startActivity(intent);
     }
 
 }
