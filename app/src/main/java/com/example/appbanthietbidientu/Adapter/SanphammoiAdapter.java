@@ -3,6 +3,7 @@ package com.example.appbanthietbidientu.Adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +16,15 @@ import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.androidnetworking.utils.Utils;
 import com.example.appbanthietbidientu.Activity.ChiTietSanPhamActivity;
 import com.example.appbanthietbidientu.Activity.SanPhamManager;
 import com.example.appbanthietbidientu.R;
+import com.example.appbanthietbidientu.model.EventBus.SuaXoaEvent;
 import com.example.appbanthietbidientu.model.Sanpham;
 import com.example.appbanthietbidientu.model.Sanphammoi;
 import com.example.appbanthietbidientu.ultil.CheckConnect;
+import com.google.firebase.crashlytics.buildtools.reloc.com.google.common.eventbus.EventBus;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
@@ -74,6 +78,13 @@ public class SanphammoiAdapter extends RecyclerView.Adapter<SanphammoiAdapter.Sa
         holder.txtTensp.setText(sanpham.getTensanpham());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
         holder.txtGiasp.setText("Giá: " + decimalFormat.format(sanpham.getGiasanpham()) + "₫");
+        if (sanpham.getHinhanhsanpham().contains("http")) {
+            Glide.with(context).load(sanpham.getHinhanhsanpham()).into(holder.imgSp);
+        }else {
+            String hinh = Utils.BASE_URL+"images/"+sanpham.getHinhanhsanpham();
+            Glide.with(context).load(hinh()).into(holder.imgSp);
+        }
+
         Typeface semibold = ResourcesCompat.getFont(context,R.font.svn_gilroy_semibold);
         holder.txtTensp.setTypeface(semibold);
 
@@ -90,7 +101,7 @@ public class SanphammoiAdapter extends RecyclerView.Adapter<SanphammoiAdapter.Sa
         return sanphamList.size();
     }
 
-    public class SanphamViewHolder extends RecyclerView.ViewHolder {
+    public class SanphamViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener, View.OnClickListener, View.OnLongClickListener {
         private ImageView imgSp;
         private TextView txtTensp,txtGiasp;
 
@@ -99,17 +110,48 @@ public class SanphammoiAdapter extends RecyclerView.Adapter<SanphammoiAdapter.Sa
             imgSp=itemView.findViewById(R.id.img_sp);
             txtTensp=itemView.findViewById(R.id.txtTensp);
             txtGiasp=itemView.findViewById(R.id.txtGiasp);
+            itemView.setOnClickListener(this);
+            itemView.setOnCreateContextMenuListener(this);
+            itemView.setOnLongClickListener(this);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent=new Intent(context, ChiTietSanPhamActivity.class);
-                    intent.putExtra("thongtinsanpham",sanphamList.get(getPosition()));
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    CheckConnect.ShowToast_Short(context,sanphamList.get(getPosition()).getTensanpham());
-                    context.startActivity(intent);
+                    if (!isLongClick){
+                        //click
+                        Intent intent=new Intent(context, ChiTietSanPhamActivity.class);
+                        intent.putExtra("thongtinsanpham",sanphamList.get(getPosition()));
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        CheckConnect.ShowToast_Short(context,sanphamList.get(getPosition()).getTensanpham());
+                        context.startActivity(intent);
+                    }else{
+                        EventBus.getDefault().postSticky(new SuaXoaEvent(sanphammoi));
+                    }
+
                 }
             });
         }
+
+        public setItemClickListener(ItemClickListener itemClickListener){
+            this.itemClickListener = itemClickListener;
+        }
+        @Override
+        public void onCreateContextMenu(ContextMenu contextMenu, View view, ContextMenu.ContextMenuInfo contextMenuInfo) {
+            contextMenu.add(0,0,getAdapterPosition(), "Sửa");
+            contextMenu.add(0,0,getAdapterPosition(), "Xóa");
+        }
+
+        @Override
+        public void onClick(View view) {
+            itemClickListener.onClick(view, getAdapterPosition(), false);
+        }
+
+        @Override
+        public boolean onLongClick(View view) {
+            itemClickListener.onClick(view, getAdapterPosition(), false);
+            return false;
+        }
     }
+
+
 }
