@@ -40,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+//
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         mAuth=FirebaseAuth.getInstance();
@@ -113,7 +113,7 @@ public class LoginActivity extends AppCompatActivity {
                             // role 1 = admin, role 2 = user
                             if (role == 1) {
                                 // layout admin
-                                Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(intent);
                                 finish();
                             } else if (role == 2) {
@@ -122,7 +122,6 @@ public class LoginActivity extends AppCompatActivity {
                                 // layout user
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(intent);
-                                finish();
                             } else {
                                 // Trường hợp vai trò không xác định
                                 Log.e("Role Error", "Undefined role for user: " + uid);
