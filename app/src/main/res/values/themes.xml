@@ -13,4 +13,11 @@
         <item name="android:statusBarColor" tools:targetApi="l">@color/background</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="neumorphirmcard">
+        <item name="neumorph_cornerFamily">rounded</item>
+        <item name="neumorph_cornerSize">10dp</item>
+
+
+    </style>
 </resources>
