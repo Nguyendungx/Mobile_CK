@@ -63,7 +63,7 @@ public class DonHangAdapter extends BaseAdapter implements Filterable {
 
         // Hiển thị thông tin đơn hàng
         viewHolder.idDonHang.setText(donHang.getId());
-        viewHolder.idUser.setText("ID Khách: " + donHang.getUser());
+        viewHolder.idUser.setText("KH: " + donHang.getUser());
         viewHolder.idQt.setText("Qt: " + donHang.getDanhSachSanPham().size()); // Đổi thành kích thước danh sách sản phẩm
         viewHolder.idTotal.setText("Total: $" + donHang.getTotal());
         viewHolder.idNgayDat.setText(String.valueOf(donHang.getThoiGian())); // Sử dụng thời gian đặt hàng

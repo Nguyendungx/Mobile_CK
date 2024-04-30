@@ -9,9 +9,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -240,7 +242,10 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
             Log.d("CurrentTime", "currentTime: " + timestamp);
             newComment.setTimestamp(timestamp); // Đặt timestamp hiện tại
         }
-        newComment.setUserId("5"); // Đặt userId (có thể là ID của người dùng đã đăng nhập)
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String email = sharedPreferences.getString("email", "");
+
+        newComment.setUserId(email); // Đặt userId (có thể là ID của người dùng đã đăng nhập)
 
         newComment.setStatus("true");
 

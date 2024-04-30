@@ -1,8 +1,11 @@
 package com.example.appbanthietbidientu.Activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -60,14 +63,16 @@ public class MainActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
         Khaibao();
 
         if(CheckConnect.haveNetworkConnected(getApplicationContext())){
+            Log.d("BBBBBBBBBBB", "UID: " );
             ActionBar();
             GetDuLieusp();
             ActionViewFlip();
@@ -83,11 +88,10 @@ public class MainActivity extends AppCompatActivity{
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,LoginActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
+                logout();
             }
         });
+
 
         Animation anim_in_right= AnimationUtils.loadAnimation(this,R.anim.anim_in_right);
         Animation anim_out_right=AnimationUtils.loadAnimation(this,R.anim.anim_out_right);
@@ -100,6 +104,10 @@ public class MainActivity extends AppCompatActivity{
         listManHinhChinh.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                String role = sharedPreferences.getString("role", "");
+
                 switch (i){
                     case 0:
                         Intent intent = new Intent(MainActivity.this, MainActivity.class);
@@ -130,8 +138,11 @@ public class MainActivity extends AppCompatActivity{
                         startActivity(live);
                         break;
                     case 6:
-                        Intent quanlydonhang = new Intent(MainActivity.this, QuanLyDonHangActivity.class);
-                        startActivity(quanlydonhang);
+                        // Chỉ role == 1 mới được truy cập mục này
+                        if ("1".equals(role)) {
+                            Intent quanlydonhang = new Intent(MainActivity.this, QuanLyDonHangActivity.class);
+                            startActivity(quanlydonhang);
+                        }
                         break;
                 }
             }
@@ -223,17 +234,43 @@ public class MainActivity extends AppCompatActivity{
 
         String email = getIntent().getStringExtra("email");
         txtEmail.setText(email);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String role = sharedPreferences.getString("role", "");
 
-        loaispArrayList=new ArrayList<>();
-        loaispArrayList.add(0,new Loaisp(0,"Trang Chính",R.drawable.ic_action_home));
-        loaispArrayList.add(1,new Loaisp(0,"Điện Thoại",R.drawable.ic_action_phone));
-        loaispArrayList.add(2,new Loaisp(0,"Laptop",R.drawable.ic_action_laptop));
-        loaispArrayList.add(3,new Loaisp(0,"Liên Hệ",R.drawable.ic_action_contact));
-        loaispArrayList.add(4,new Loaisp(0,"Thông Tin", R.drawable.ic_action_infor));
-        loaispArrayList.add(5,new Loaisp(0,"Livestream",R.drawable.live));
-        loaispArrayList.add(6,new Loaisp(0,"Quản lý đơn hàng",R.drawable.ic_action_infor));
+// Tạo danh sách loại sản phẩm dựa vào vai trò của người dùng
+        ArrayList<Loaisp> loaispArrayList = new ArrayList<>();
 
-        LoaispAdapter loaispAdapter=new LoaispAdapter(loaispArrayList,MainActivity.this);
+// Mục Trang Chính
+        loaispArrayList.add(0, new Loaisp(0, "Trang Chính", R.drawable.ic_action_home));
+
+// Mục Điện Thoại
+        if ("1".equals(role) || "2".equals(role)) {
+            loaispArrayList.add(1, new Loaisp(0, "Điện Thoại", R.drawable.ic_action_phone));
+        }
+
+// Mục Laptop
+        if ("1".equals(role) || "2".equals(role)) {
+            loaispArrayList.add(2, new Loaisp(0, "Laptop", R.drawable.ic_action_laptop));
+        }
+
+// Mục Liên Hệ
+        loaispArrayList.add(3, new Loaisp(0, "Liên Hệ", R.drawable.ic_action_contact));
+
+// Mục Thông Tin
+        loaispArrayList.add(4, new Loaisp(0, "Thông Tin", R.drawable.ic_action_infor));
+
+// Mục Livestream
+        if ("1".equals(role) || "2".equals(role)) {
+            loaispArrayList.add(5, new Loaisp(0, "Livestream", R.drawable.live));
+        }
+
+// Mục Quản lý đơn hàng
+        if ("1".equals(role)) {
+            loaispArrayList.add(6, new Loaisp(0, "Quản lý đơn hàng", R.drawable.ic_action_infor));
+        }
+
+// Tạo adapter và gán danh sách loại sản phẩm vào ListView hoặc RecyclerView
+        LoaispAdapter loaispAdapter = new LoaispAdapter(loaispArrayList, MainActivity.this);
         listManHinhChinh.setAdapter(loaispAdapter);
 
         if(gioHangArrayList != null){
@@ -242,4 +279,26 @@ public class MainActivity extends AppCompatActivity{
             gioHangArrayList=new ArrayList<>();
         }
     }
+
+    private void logout() {
+        // Xóa dữ liệu đã chia sẻ
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+
+        // Kiểm tra xem MainActivity có đang hoạt động trước khi kết thúc nó
+        if (!isFinishing()) {
+            // Chuyển đến màn hình đăng nhập
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish(); // Kết thúc MainActivity
+        } else {
+            Log.d("MainActivity", "MainActivity is already finishing or finished.");
+        }
+    }
+
+
+
 }
