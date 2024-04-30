@@ -17,4 +17,9 @@
     <color name="pink_bold">#DE8073</color>
     <color name="gray">#E0E6EB</color>
     <color name="gray_text">#626E77</color>
+
+    <color name="text_color">#1E4175</color>
+    <color name="background_color">#ecf0f3</color>
+    <color name="highlight">#ffffff</color>
+    <color name="shadow_color">#d9dbde</color>
 </resources>

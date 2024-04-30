@@ -5,6 +5,16 @@ import java.io.Serializable;
 public class Sanpham implements Serializable {
     int id;
     String tensanpham;
+    String surl;
+
+    public String getSurl() {
+        return surl;
+    }
+
+    public void setSurl(String surl) {
+        this.surl = surl;
+    }
+
     int giasanpham;
     String hinhanhsanpham;
     String motasanpham;
