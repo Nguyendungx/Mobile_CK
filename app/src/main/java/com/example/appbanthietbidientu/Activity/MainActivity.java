@@ -24,6 +24,7 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appbanthietbidientu.Adapter.LoaispAdapter;
@@ -133,6 +134,10 @@ public class MainActivity extends AppCompatActivity{
                         Intent quanlydonhang = new Intent(MainActivity.this, QuanLyDonHangActivity.class);
                         startActivity(quanlydonhang);
                         break;
+                    case 7:
+                        Intent themsuaxoa = new Intent(MainActivity.this, RecycleViewActivity.class);
+                        startActivity(themsuaxoa);
+                        break;
                 }
             }
         });
@@ -232,6 +237,7 @@ public class MainActivity extends AppCompatActivity{
         loaispArrayList.add(4,new Loaisp(0,"Thông Tin", R.drawable.ic_action_infor));
         loaispArrayList.add(5,new Loaisp(0,"Livestream",R.drawable.live));
         loaispArrayList.add(6,new Loaisp(0,"Quản lý đơn hàng",R.drawable.ic_action_infor));
+        loaispArrayList.add(7,new Loaisp(0,"Thêm xóa sửa sản phẩm",R.drawable.ic_action_infor));
 
         LoaispAdapter loaispAdapter=new LoaispAdapter(loaispArrayList,MainActivity.this);
         listManHinhChinh.setAdapter(loaispAdapter);
