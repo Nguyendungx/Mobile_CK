@@ -39,7 +39,7 @@
                     </androidx.cardview.widget.CardView>
                 </androidx.appcompat.widget.Toolbar>
                 <LinearLayout
-                    android:background="@color/background"
+                    android:background="@color/white"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
@@ -52,7 +52,7 @@
                             android:layout_marginStart="10dp"
                             android:padding="5dp"
                             android:text="Sản phẩm mới nhất"
-                            android:textColor="#FFEB3B"
+                            android:textColor="@color/green_bold"
                             android:textStyle="bold|italic"
                             android:textSize="28sp"
                             android:layout_width="wrap_content"
@@ -61,11 +61,13 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
+
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/listSanphammoi"
-                            android:layout_marginStart="15dp"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="15dp" />
+
                         <ProgressBar
                             android:id="@+id/loadMain"
                             android:layout_centerInParent="true"

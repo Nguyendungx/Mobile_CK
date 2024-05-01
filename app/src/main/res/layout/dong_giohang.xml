@@ -27,15 +27,16 @@
         <TextView
             android:id="@+id/textviewTenGioHang"
             android:text="Tên món hàng"
-            android:textColor="#111"
-            android:textSize="23dp"
+            android:textSize="20dp"
+            style="@style/textviewgreen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <TextView
             android:id="@+id/textviewGiaMonHang"
             android:text="Giá món hàng"
-            android:textSize="17dp"
-            android:textColor="#F44336"
+            android:textSize="16dp"
+            android:textColor="@color/pink_bold"
+            android:textStyle="bold"
             android:layout_marginTop="3dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -54,7 +55,7 @@
                 android:layout_marginBottom="2dp"
                 app:cardCornerRadius="10dp">
                 <TextView
-                    android:background="#FFC107"
+                    android:background="@color/green_medium"
                     android:gravity="center"
                     android:text="-"
                     android:textSize="25dp"
@@ -81,7 +82,7 @@
                 android:layout_marginBottom="2dp"
                 app:cardCornerRadius="10dp">
             <TextView
-                android:background="#FFC107"
+                android:background="@color/green_medium"
                 android:gravity="center"
                 android:text="+"
                 android:textSize="25dp"

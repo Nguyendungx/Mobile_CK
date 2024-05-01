@@ -17,7 +17,8 @@
         android:layout_width="150dp"
         android:layout_height="49dp"
         android:text="Product Name"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:textColor="@color/green_bold"/>
 
     <TextView
         android:id="@+id/textQuantity"
@@ -33,7 +34,8 @@
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:layout_marginStart="8dp"
-        android:text="Price: $10" />
+        android:text="Price: $10"
+        android:textColor="@color/gray_text"/>
 
     <TextView
         android:id="@+id/textTotalPrice"
@@ -41,6 +43,7 @@
         android:layout_height="60dp"
         android:layout_marginStart="8dp"
         android:text="Total Price: $50"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:textColor="@color/gray_text"/>
 
 </LinearLayout>
