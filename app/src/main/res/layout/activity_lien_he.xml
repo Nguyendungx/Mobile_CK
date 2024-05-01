@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_login"
+    android:background=""
     tools:context=".Activity.LienHeActivity">
     <RelativeLayout
         android:layout_width="match_parent"
@@ -17,24 +17,25 @@
                 android:id="@+id/ToolbarLienHe"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="#0b162a"
+                android:background="@color/green_medium"
                 android:baselineAligned="false"
                 app:title="Liên Hệ"
                 app:titleTextColor="#FFFFFF" />
             <TextView
                 android:text="Liên Hệ Với Chúng Tôi"
-                android:background="@drawable/tittle"
-                android:padding="30dp"
                 android:textSize="30dp"
-                android:layout_gravity="center"
                 android:layout_marginTop="40dp"
-                android:textColor="#FFFFFF"
-                android:layout_width="wrap_content"
+                android:layout_marginBottom="40dp"
+                android:textAlignment="center"
+                android:textColor="@color/green_bold"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <LinearLayout
                 android:gravity="center"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="@color/green_medium">
 
                 <LinearLayout
                     android:layout_width="350dp"
