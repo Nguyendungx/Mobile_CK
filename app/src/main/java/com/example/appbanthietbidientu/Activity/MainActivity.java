@@ -1,8 +1,11 @@
 package com.example.appbanthietbidientu.Activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -60,14 +63,16 @@ public class MainActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
         Khaibao();
 
         if(CheckConnect.haveNetworkConnected(getApplicationContext())){
+            Log.d("BBBBBBBBBBB", "UID: " );
             ActionBar();
             GetDuLieusp();
             ActionViewFlip();
@@ -100,6 +105,10 @@ public class MainActivity extends AppCompatActivity{
         listManHinhChinh.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                String role = sharedPreferences.getString("role", "");
+
                 switch (i){
                     case 0:
                         Intent intent = new Intent(MainActivity.this, MainActivity.class);
@@ -130,8 +139,11 @@ public class MainActivity extends AppCompatActivity{
                         startActivity(live);
                         break;
                     case 6:
-                        Intent quanlydonhang = new Intent(MainActivity.this, QuanLyDonHangActivity.class);
-                        startActivity(quanlydonhang);
+                        // Chỉ role == 1 mới được truy cập mục này
+                        if ("1".equals(role)) {
+                            Intent quanlydonhang = new Intent(MainActivity.this, QuanLyDonHangActivity.class);
+                            startActivity(quanlydonhang);
+                        }
                         break;
                 }
             }
@@ -231,7 +243,12 @@ public class MainActivity extends AppCompatActivity{
         loaispArrayList.add(3,new Loaisp(0,"Liên Hệ",R.drawable.ic_action_contact));
         loaispArrayList.add(4,new Loaisp(0,"Thông Tin", R.drawable.ic_action_infor));
         loaispArrayList.add(5,new Loaisp(0,"Livestream",R.drawable.live));
-        loaispArrayList.add(6,new Loaisp(0,"Quản lý đơn hàng",R.drawable.ic_action_infor));
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String role = sharedPreferences.getString("role", "");
+        if("1".equals(role)){
+            loaispArrayList.add(6,new Loaisp(0,"Quản lý đơn hàng",R.drawable.ic_action_infor));
+        }
+
 
         LoaispAdapter loaispAdapter=new LoaispAdapter(loaispArrayList,MainActivity.this);
         listManHinhChinh.setAdapter(loaispAdapter);

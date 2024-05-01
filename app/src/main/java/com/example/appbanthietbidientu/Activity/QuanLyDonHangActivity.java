@@ -84,6 +84,7 @@ public class QuanLyDonHangActivity extends BaseFunctionActivity {
 // Tạo Intent và đưa thông tin đơn hàng vào Bundle
                 Intent intent = new Intent(getApplicationContext(), ChiTietDonHangActivity.class);
                 intent.putExtra("idDonHang",selectedDonHang.getId());
+                finish();
 
 // Chuyển sang activity ChiTietDonHangActivity
                 startActivity(intent);

@@ -114,8 +114,6 @@ public class ChiTietDonHangActivity extends AppCompatActivity {
                     public void onSuccess(Void aVoid) {
                         // Trong ChiTietDonHangActivity
                         Intent resultIntent = new Intent();
-                        setResult(RESULT_OK, resultIntent);
-                        finish();
 
                         // Xử lý khi cập nhật thành công
                             Toast.makeText(ChiTietDonHangActivity.this, "Cập nhật trạng thái đơn hàng thành công", Toast.LENGTH_SHORT).show();
