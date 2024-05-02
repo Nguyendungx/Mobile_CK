@@ -106,7 +106,6 @@ public class LoginActivity extends AppCompatActivity {
                             editor.putString("email", email);
                             editor.putString("role", String.valueOf(role));
 
-                            Log.e("AAAAAAAAAAAAAAAA", "Undefined role for user: " + email);
                             editor.apply();
 
                             // Kiểm tra vai trò và chuyển hướng tới layout tương ứng

@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,12 +25,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterActivity extends AppCompatActivity {
-    private EditText emailedit, passedit, nameedit;
+    private EditText emailedit, passedit, nameedit,txtbacklogin;
     private Button btn_signup;
+    private Button btn_login;
     private FirebaseAuth mAuth;
     private String uid;
     private DatabaseReference db;
     private String email, pass, name;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,6 +43,7 @@ public class RegisterActivity extends AppCompatActivity {
         passedit = findViewById(R.id.password);
         nameedit = findViewById(R.id.name);
         btn_signup = findViewById(R.id.btn_signup);
+        btn_login=findViewById(R.id.btn_login);
 
 
 
@@ -47,6 +51,12 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 register();
+            }
+        });
+        btn_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }

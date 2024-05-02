@@ -57,26 +57,26 @@
         <Button
             android:id="@+id/btnHLS"
             style="@style/button2"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="Start HLS"
+            android:text="Live Streams"
             android:textAllCaps="false" />
 
         <Button
             android:id="@+id/btnWebcam"
             style="@style/button2"
-            android:layout_width="wrap_content"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="5sp"
-            android:text="Toggle Webcam"
+            android:text="On/Off WebCam"
             android:textAllCaps="false" />
 
         <Button
             android:id="@+id/btnMic"
             style="@style/button2"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="Toggle Mic"
+            android:text="On/Off Mic"
             android:textAllCaps="false" />
 
     </LinearLayout>

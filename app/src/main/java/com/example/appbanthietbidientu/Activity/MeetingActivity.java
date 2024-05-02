@@ -2,7 +2,9 @@ package com.example.appbanthietbidientu.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 
 import com.example.appbanthietbidientu.Activity.fragment.SpeakerFragment;
 import com.example.appbanthietbidientu.Activity.fragment.ViewerFragment;
@@ -24,7 +26,9 @@ public class MeetingActivity extends AppCompatActivity {
         final String meetingId = getIntent().getStringExtra("meetingId");
         String token = getIntent().getStringExtra("token");
         String mode = getIntent().getStringExtra("mode");
-        String localParticipantName = "John Doe";
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String email = sharedPreferences.getString("email", "");
+        String localParticipantName =email;
         boolean streamEnable = mode.equals("CONFERENCE");
 
         // initialize VideoSDK

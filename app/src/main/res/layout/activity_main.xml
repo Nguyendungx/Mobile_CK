@@ -97,7 +97,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="160dp"
-                        android:background="@drawable/change_color" />
+                        android:background="@color/green_medium" />
 
                     <TextView
                         android:text="Trang Chủ"

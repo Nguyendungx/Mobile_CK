@@ -85,17 +85,18 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewDonHangChiTiet"
         android:layout_width="match_parent"
-        android:layout_height="348dp"
+        android:layout_height="300dp"
         android:layout_marginTop="16dp" />
 
     <!--Thêm nút xác nhận-->
     <Button
         android:id="@+id/buttonXacNhan"
+        style="@style/button1"
+        android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/button1"
-        android:text="Xác nhận"
         android:onClick="onClickXacNhan"
+        android:text="      Xác nhận      "
         tools:ignore="OnClick" /> <!--Đặt tên hàm xử lý sự kiện khi click-->
 
 </LinearLayout>
