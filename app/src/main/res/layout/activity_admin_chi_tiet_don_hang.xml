@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Activity.ChiTietDonHangActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/ToolbarChiTietDonHang"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:title="Chi Tiết Đơn Hàng"
+        app:titleTextColor="#FFFFFF"
+        android:background="@color/green_medium"/>
+
+    <TextView
+        android:id="@+id/TextThongTinKhachHang"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Thông tin khách hàng:"
+        style="@style/textviewblack" />
+
+    <TextView
+        android:id="@+id/TextTenKhachHang"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/text"
+        android:text="Tên: -" />
+
+    <TextView
+        android:id="@+id/TextTrangThaiDonHang"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Trạng thái đơn hàng:"
+        style="@style/textviewblack"/>
+
+    <Spinner
+        android:id="@+id/spinnerTrangThai"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        style="@style/textviewblack" />
+
+    <TextView
+        android:id="@+id/TextTongTien"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Tổng tiền:"
+        style="@style/textviewblack"/>
+
+    <TextView
+        android:id="@+id/TextGiaTriTongTien"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        style="@style/textviewgreen"
+        android:text="-" />
+
+
+    <TextView
+        android:id="@+id/textThoiGian"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="13/01/2024"
+        android:layout_marginEnd="16dp"
+        android:textSize="16sp"
+        android:textStyle="normal" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewDonHangChiTiet"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginTop="16dp" />
+
+    <!--Thêm nút xác nhận-->
+    <Button
+        android:id="@+id/buttonXacNhan"
+        style="@style/button1"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onClickXacNhan"
+        android:text="      Xác nhận      "
+        tools:ignore="OnClick" /> <!--Đặt tên hàm xử lý sự kiện khi click-->
+
+</LinearLayout>

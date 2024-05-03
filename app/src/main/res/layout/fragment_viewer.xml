@@ -21,14 +21,16 @@
             android:layout_weight="3"
             android:text="Meeting Id : "
             android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:layout_margin="10dp"
+            android:textSize="20dp" />
 
         <Button
             android:id="@+id/btnLeave"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Leave" />
+            android:text="Leave"
+            style="@style/button1"/>
 
     </LinearLayout>
 

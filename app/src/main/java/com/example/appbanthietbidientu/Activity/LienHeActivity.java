@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -31,7 +32,7 @@ public class LienHeActivity extends BaseFunctionActivity {
     LinearLayout contact;
     RelativeLayout layoutContact;
     LinearLayout callNow,messNow;
-    CardView contactHuy;
+    Button contactHuy;
     int PERMISSION_CODE = 100;
     RelativeLayout bgCoverLienHe;
 

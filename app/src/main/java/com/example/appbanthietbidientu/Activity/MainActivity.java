@@ -1,8 +1,11 @@
 package com.example.appbanthietbidientu.Activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,6 +38,7 @@ import com.example.appbanthietbidientu.model.Sanpham;
 import com.example.appbanthietbidientu.ultil.ApiSp;
 import com.example.appbanthietbidientu.ultil.CheckConnect;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -59,6 +63,7 @@ public class MainActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -67,6 +72,7 @@ public class MainActivity extends AppCompatActivity{
         Khaibao();
 
         if(CheckConnect.haveNetworkConnected(getApplicationContext())){
+            Log.d("BBBBBBBBBBB", "UID: " );
             ActionBar();
             GetDuLieusp();
             ActionViewFlip();
@@ -99,6 +105,10 @@ public class MainActivity extends AppCompatActivity{
         listManHinhChinh.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                String role = sharedPreferences.getString("role", "");
+
                 switch (i){
                     case 0:
                         Intent intent = new Intent(MainActivity.this, MainActivity.class);
@@ -127,6 +137,11 @@ public class MainActivity extends AppCompatActivity{
                     case 5:
                         Intent live = new Intent(MainActivity.this, JoinActivity.class);
                         startActivity(live);
+                        break;
+                    case 6:
+
+                            Intent quanlydonhang = new Intent(MainActivity.this, QuanLyDonHangActivity.class);
+                            startActivity(quanlydonhang);
                         break;
                 }
             }
@@ -165,7 +180,7 @@ public class MainActivity extends AppCompatActivity{
 
         for(int i=0;i<mangQuangCao.size();i++){
             ImageView imageView=new ImageView(getApplicationContext());
-            Picasso.with(MainActivity.this).load(mangQuangCao.get(i)).into(imageView);
+            Picasso.get().load(mangQuangCao.get(i)).into(imageView);
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             viewFlipper.addView(imageView);
         }
@@ -226,7 +241,15 @@ public class MainActivity extends AppCompatActivity{
         loaispArrayList.add(3,new Loaisp(0,"Liên Hệ",R.drawable.ic_action_contact));
         loaispArrayList.add(4,new Loaisp(0,"Thông Tin", R.drawable.ic_action_infor));
         loaispArrayList.add(5,new Loaisp(0,"Livestream",R.drawable.live));
-        loaispArrayList.add(6,new Loaisp(0,"Quản lý doanh thu",R.drawable.ic_action_infor));
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String role = sharedPreferences.getString("role", "");
+        if("1".equals(role)){
+            loaispArrayList.add(6,new Loaisp(0,"Quản lý đơn hàng",R.drawable.ic_action_infor));
+        }
+        if("2".equals(role)){
+            loaispArrayList.add(6,new Loaisp(0,"Đơn hàng của tôi",R.drawable.ic_action_infor));
+        }
+
 
         LoaispAdapter loaispAdapter=new LoaispAdapter(loaispArrayList,MainActivity.this);
         listManHinhChinh.setAdapter(loaispAdapter);

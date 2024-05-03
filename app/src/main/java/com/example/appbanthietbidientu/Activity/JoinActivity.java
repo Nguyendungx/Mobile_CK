@@ -1,6 +1,7 @@
 package com.example.appbanthietbidientu.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -8,6 +9,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -20,11 +22,14 @@ import com.example.appbanthietbidientu.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Objects;
+
 public class JoinActivity extends AppCompatActivity {
 
     private String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlrZXkiOiI4MzU0NmY0MS0wMzBlLTQ5M2YtYmI1NC1jNjFiYTdlMzg1M2QiLCJwZXJtaXNzaW9ucyI6WyJhbGxvd19qb2luIl0sImlhdCI6MTcxMzU0OTgzNSwiZXhwIjoxNzQ1MDg1ODM1fQ.I1xfKnci4bC03nIsHVe4YuDk604Lt2uuHrENJ9Hp1DE";
     private static final int PERMISSION_REQ_ID = 22;
 
+    Toolbar toolbarJoinMeeting;
     private static final String[] REQUESTED_PERMISSIONS = {
             Manifest.permission.RECORD_AUDIO,
             Manifest.permission.CAMERA
@@ -41,11 +46,12 @@ public class JoinActivity extends AppCompatActivity {
         final Button btnJoinHost = findViewById(R.id.btnJoinHostMeeting);
         final Button btnJoinViewer = findViewById(R.id.btnJoinViewerMeeting);
         final EditText etMeetingId = findViewById(R.id.etMeetingId);
+        final Toolbar toolbarJoinMeeting = findViewById(R.id.ToolbarJoinMeeting);
 
         // Request permission
         checkSelfPermission(REQUESTED_PERMISSIONS[0], PERMISSION_REQ_ID);
         checkSelfPermission(REQUESTED_PERMISSIONS[1], PERMISSION_REQ_ID);
-
+        ActionBar(toolbarJoinMeeting);
         // create meeting and join as Host
         btnCreate.setOnClickListener(v -> createMeeting(token));
 
@@ -97,6 +103,17 @@ public class JoinActivity extends AppCompatActivity {
                         Toast.makeText(JoinActivity.this, anError.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+    private void ActionBar(Toolbar toolbarJoinMeeting) {
+        setSupportActionBar(toolbarJoinMeeting);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        toolbarJoinMeeting.setNavigationIcon(R.drawable.ic_action_back);
+        toolbarJoinMeeting.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     private void checkSelfPermission(String permission, int requestCode) {

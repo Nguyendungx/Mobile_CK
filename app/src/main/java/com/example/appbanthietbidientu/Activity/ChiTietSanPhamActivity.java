@@ -9,9 +9,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -36,7 +38,23 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.paypal.checkout.approve.Approval;
+import com.paypal.checkout.approve.OnApprove;
+import com.paypal.checkout.createorder.CreateOrder;
+import com.paypal.checkout.createorder.CreateOrderActions;
+import com.paypal.checkout.createorder.CurrencyCode;
+import com.paypal.checkout.createorder.OrderIntent;
+import com.paypal.checkout.createorder.UserAction;
+import com.paypal.checkout.order.Amount;
+import com.paypal.checkout.order.AppContext;
+import com.paypal.checkout.order.CaptureOrderResult;
+import com.paypal.checkout.order.OnCaptureComplete;
+import com.paypal.checkout.order.OrderRequest;
+import com.paypal.checkout.order.PurchaseUnit;
+import com.paypal.checkout.paymentbutton.PaymentButtonContainer;
 import com.squareup.picasso.Picasso;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -64,6 +82,9 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     Button buttonSendComment;
     Button btn_Delete;
     CommentAdapter commentAdapter;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -147,7 +168,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         motaChiTiet.setText(sanpham.getMotasanpham());
         Typeface regular = ResourcesCompat.getFont(ChiTietSanPhamActivity.this,R.font.svn_gilroy_regular);
         motaChiTiet.setTypeface(regular);
-        Picasso.with(getApplicationContext()).load(sanpham.getHinhanhsanpham())
+        Picasso.get().load(sanpham.getHinhanhsanpham())
                 .placeholder(R.drawable.loadimage)
                 .error(R.drawable.errorimage)
                 .into(anhChitietsp);
@@ -157,6 +178,8 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     }
     private void getCommentsForProduct() {
         // Gửi yêu cầu để lấy danh sách comment từ API
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String email = sharedPreferences.getString("email", "");
         ApiSp.apiDevice.getlistComment().enqueue(new Callback<List<Comment>>() {
             @Override
             public void onResponse(Call<List<Comment>> call, Response<List<Comment>> response) {
@@ -170,7 +193,9 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
                         }
                     }
                     // Xử lý danh sách comment ở đây
-                    displayComments(filteredComments);
+// Xử lý danh sách comment ở đây
+                    displayComments(filteredComments, email);
+
                 } else {
                     // Xử lý nếu có lỗi khi nhận phản hồi từ server
                     Log.e("API Call", "Failed to get comments: " + response.message());
@@ -185,20 +210,18 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         });
     }
 
-    private void displayComments(List<Comment> comments) {
+    private void displayComments(List<Comment> comments, String userEmail) {
         recyclerViewComments.setLayoutManager(new LinearLayoutManager(this));
-        commentAdapter = new CommentAdapter(comments);
+        commentAdapter = new CommentAdapter(comments, userEmail);
         recyclerViewComments.setAdapter(commentAdapter);
 
         // Thiết lập CommentDeleteListener cho CommentAdapter
-        commentAdapter.setCommentDeleteListener(new CommentAdapter.CommentDeleteListener() {
-            @Override
-            public void onCommentDelete(String commentId) {
-                // Xử lý khi người dùng click vào button xóa comment
-                deleteComment(commentId);
-            }
+        commentAdapter.setCommentDeleteListener(commentId -> {
+            // Xử lý khi người dùng click vào button xóa comment
+            deleteComment(commentId);
         });
     }
+
     private void postComment() {
         sanpham.getId();
         // Lấy nội dung của comment từ EditText
@@ -221,7 +244,10 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
             Log.d("CurrentTime", "currentTime: " + timestamp);
             newComment.setTimestamp(timestamp); // Đặt timestamp hiện tại
         }
-        newComment.setUserId("5"); // Đặt userId (có thể là ID của người dùng đã đăng nhập)
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String email = sharedPreferences.getString("email", "");
+
+        newComment.setUserId(email); // Đặt userId (có thể là ID của người dùng đã đăng nhập)
 
         newComment.setStatus("true");
 
@@ -323,6 +349,8 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         recyclerViewComments = findViewById(R.id.recyclerViewComments);
         editTextComment = findViewById(R.id.editTextComment);
         buttonSendComment = findViewById(R.id.buttonSendComment);
+
+
         buttonSendComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

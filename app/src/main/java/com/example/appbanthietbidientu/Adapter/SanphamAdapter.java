@@ -101,7 +101,7 @@ public class SanphamAdapter extends BaseAdapter implements Filterable {
         viewHolder.motaDienThoai.setMaxLines(2);
         viewHolder.motaDienThoai.setEllipsize(TextUtils.TruncateAt.END);
         viewHolder.motaDienThoai.setText(dienThoai.getMotasanpham());
-        Picasso.with(context).load(dienThoai.getHinhanhsanpham())
+        Picasso.get().load(dienThoai.getHinhanhsanpham())
                 .placeholder(R.drawable.loadimage)
                 .error(R.drawable.errorimage)
                 .into(viewHolder.hinhAnhDienThoai);

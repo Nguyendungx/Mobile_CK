@@ -50,7 +50,7 @@ public class SanphammoiAdapter extends RecyclerView.Adapter<SanphammoiAdapter.Sa
         Typeface semibold = ResourcesCompat.getFont(context,R.font.svn_gilroy_semibold);
         holder.txtTensp.setTypeface(semibold);
 
-        Picasso.with(context).load(sanpham.getHinhanhsanpham())
+        Picasso.get().load(sanpham.getHinhanhsanpham())
                 .placeholder(R.drawable.loadimage)
                 .error(R.drawable.errorimage)
                 .into(holder.imgSp);

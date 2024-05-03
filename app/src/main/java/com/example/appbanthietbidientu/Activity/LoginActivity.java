@@ -13,6 +13,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
 
 import com.example.appbanthietbidientu.R;
 import com.example.appbanthietbidientu.model.Account;
@@ -37,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+//
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         mAuth=FirebaseAuth.getInstance();
@@ -96,14 +100,24 @@ public class LoginActivity extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             // lấy vai trò từ account vừa login
                             int role = snapshot.child("role").getValue(Integer.class);
+                            // Lưu uid vào SharedPreferences
+                            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString("email", email);
+                            editor.putString("role", String.valueOf(role));
+
+                            editor.apply();
 
                             // Kiểm tra vai trò và chuyển hướng tới layout tương ứng
                             // role 1 = admin, role 2 = user
                             if (role == 1) {
                                 // layout admin
-                                Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(intent);
+                                finish();
                             } else if (role == 2) {
+
+
                                 // layout user
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(intent);

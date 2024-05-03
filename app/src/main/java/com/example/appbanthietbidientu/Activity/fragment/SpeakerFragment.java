@@ -142,7 +142,11 @@ public class SpeakerFragment extends Fragment {
             webcamEnabled=!webcamEnabled;
         });
 
-        btnLeave.setOnClickListener(v -> meeting.leave());
+        btnLeave.setOnClickListener(v -> {
+            mActivity.finish();
+
+        });
+
 
         btnHls.setOnClickListener(v -> {
             if (!hlsEnabled) {
@@ -183,11 +187,11 @@ public class SpeakerFragment extends Fragment {
                     tvHlsState.setText("Current HLS State : " + HlsState.getString("status"));
                     if (HlsState.getString("status").equals("HLS_STARTED")) {
                         hlsEnabled=true;
-                        btnHls.setText("Stop HLS");
+                        btnHls.setText("Stop LiveStream");
                     }
                     if (HlsState.getString("status").equals("HLS_STOPPED")) {
                         hlsEnabled = false;
-                        btnHls.setText("Start HLS");
+                        btnHls.setText("Start LiveStream");
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

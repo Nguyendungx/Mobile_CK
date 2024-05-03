@@ -6,23 +6,23 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#FFFFFF"
-    tools:context=".Activity.DienThoaiActivity">
+    tools:context=".Activity.QuanLyDonHangActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/ToolbarDienThoai"
+        android:id="@+id/ToolbarQuanLyDonHang"
         android:background="@color/green_medium"
-        app:title="Điện Thoại"
+        app:title="Quản lý đơn hàng"
         app:titleTextColor="#FFFFFF"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         />
     <ListView
-        android:id="@+id/listviewDienThoai"
-        android:layout_below="@+id/ToolbarDienThoai"
+        android:id="@+id/listviewDonHang"
+        android:layout_below="@+id/ToolbarQuanLyDonHang"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <ProgressBar
-        android:id="@+id/loadDienThoai"
+        android:id="@+id/loadDonHang"
         android:layout_centerInParent="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

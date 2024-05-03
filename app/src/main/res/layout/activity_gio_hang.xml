@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.GioHangActivity"
-    android:background="@color/background">
+    android:background="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,9 +15,9 @@
             android:id="@+id/ToolbarGioHang"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="#FFC107"
+            android:background="@color/green_medium"
             app:title="Giỏ Hàng"
-            app:titleTextColor="@color/black" />
+            app:titleTextColor="@color/white" />
 
         <LinearLayout
             android:layout_weight="7"
@@ -30,7 +30,7 @@
                     android:id="@+id/textviewThongbao"
                     android:textSize="30sp"
                     android:layout_gravity="center"
-                    android:textColor="#FFEB3B"
+                    android:textColor="@color/green_bold"
                     android:text="Giỏ hàng của bạn đang trống"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
@@ -62,15 +62,15 @@
                 android:layout_height="wrap_content">
                 <TextView
                     android:text="Tổng Tiền: "
-                    android:textSize="30dp"
-                    android:textColor="#FFEB3B"
+                    android:textSize="20dp"
+                    android:textColor="@color/green_bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
                     android:id="@+id/textviewTongTien"
                     android:text="Giá Trị"
-                    android:textSize="30sp"
-                    android:textColor="#FFEB3B"
+                    android:textSize="20sp"
+                    android:textColor="@color/pink_bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
@@ -78,43 +78,26 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <androidx.cardview.widget.CardView
+            android:orientation="vertical"
+            android:layout_marginBottom="20dp"
+            >
+            <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                app:cardCornerRadius="10dp">
-                <TextView
-                    android:id="@+id/ThanhToanGioHang"
-                    android:gravity="center"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingVertical="15dp"
-                    android:text="Thanh toán giỏ hàng"
-                    android:textColor="@color/white"
-                    android:background="#FFC107"
-                    android:textSize="20sp"
-                    />
-            </androidx.cardview.widget.CardView>
+                android:id="@+id/ThanhToanGioHang"
+                android:paddingVertical="15dp"
+                android:text="Thanh toán giỏ hàng"
+                style="@style/button2"/>
 
-            <androidx.cardview.widget.CardView
-                android:layout_margin="10dp"
+            <Button
+                android:id="@+id/TiepTucMuaHang"
+                android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="10dp"
-                >
-                <TextView
-                    android:id="@+id/TiepTucMuaHang"
-                    android:gravity="center"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingVertical="15dp"
-                    android:text="Tiếp tục mua hàng"
-                    android:textColor="@color/white"
-                    android:background="#FFC107"
-                    android:textSize="20sp"
-                    />
-            </androidx.cardview.widget.CardView>
+                android:paddingVertical="15dp"
+                android:text="Tiếp tục mua hàng"
+                style="@style/button1"/>
+
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

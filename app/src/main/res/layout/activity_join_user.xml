@@ -4,8 +4,9 @@
     android:id="@+id/createorjoinlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@color/white"
     android:gravity="center"
+    android:padding="40dp"
     android:orientation="vertical">
 
     <EditText
@@ -14,14 +15,15 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:hint="Enter Meeting Id"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white" />
+        style="@style/text" />
 
     <Button
         android:id="@+id/btnJoinViewerMeeting"
-        android:layout_width="wrap_content"
+
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Join as Viewer"
+        style="@style/button1"
         android:textAllCaps="false" />
 
 </LinearLayout>

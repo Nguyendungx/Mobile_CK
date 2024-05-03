@@ -92,14 +92,7 @@
                 android:text="Sign Up"
                 style="@style/button2" />
 
-            <!-- Sign Up TextView -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Don't have an account? Sign Up!"
-                style="@style/textviewgreen"
-                android:clickable="true"
-                android:onClick="openRegisterActivity"/>
+
 
         </LinearLayout>
     </RelativeLayout>

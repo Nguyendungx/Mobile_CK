@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Doanh thu từng sản phẩm"
+        style="@style/textviewgreen"
         android:textSize="20sp"
         android:textStyle="bold"
         android:padding="10dp"/>
@@ -30,6 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Doanh thu theo tháng"
+        style="@style/textviewgreen"
         android:textSize="20sp"
         android:textStyle="bold"
         android:padding="10dp"/>
@@ -47,6 +49,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Doanh thu theo năm"
+        style="@style/textviewgreen"
         android:textSize="20sp"
         android:textStyle="bold"
         android:padding="10dp"/>

@@ -1,51 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/createorjoinlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
-    android:gravity="center"
+    android:background="@color/white"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btnCreateMeeting"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Create Meeting"
-        android:textAllCaps="false" />
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/ToolbarJoinMeeting"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:titleTextColor="#FFFFFF"
+        app:title="LiveStream"
+        android:background="@color/green_medium"/>
 
     <TextView
-        android:id="@+id/tvText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingVertical="5sp"
-        android:text="OR"
-        android:textColor="@color/white"
-        android:textSize="20sp" />
+        android:layout_width="match_parent"
+        android:layout_height="137dp"
+        android:textSize="28dp"
+        android:textStyle="bold"
+        android:padding="20dp"
+        android:text="Join Meeting with us"
+        android:background="@color/green_medium"
+        android:gravity="center_vertical"
+        android:textColor="@color/white"/>
 
-    <EditText
-        android:id="@+id/etMeetingId"
-        android:theme="@android:style/Theme.Holo"
-        android:layout_width="250dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter Meeting Id"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white" />
+        android:orientation="vertical"
+        android:padding="40dp">
 
-    <Button
-        android:id="@+id/btnJoinHostMeeting"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8sp"
-        android:text="Join as Host"
-        android:textAllCaps="false" />
+        <Button
+            android:id="@+id/btnCreateMeeting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Create Meeting"
+            style="@style/button1"
+            android:textAllCaps="false" />
 
-    <Button
-        android:id="@+id/btnJoinViewerMeeting"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Join as Viewer"
-        android:textAllCaps="false" />
+        <TextView
+            android:id="@+id/tvText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="5sp"
+            android:text="OR"
+            android:gravity="center"
+            android:textColor="@color/gray_text"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/etMeetingId"
+            android:theme="@android:style/Theme.Holo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Meeting Id"
+            style="@style/text" />
+
+        <Button
+            android:id="@+id/btnJoinHostMeeting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8sp"
+            android:text="Join as Host"
+            android:textAllCaps="false"
+            style="@style/button1"/>
+
+        <Button
+            android:id="@+id/btnJoinViewerMeeting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Join as Viewer"
+            style="@style/button2"
+            android:textAllCaps="false" />
+
+    </LinearLayout>
 
 </LinearLayout>

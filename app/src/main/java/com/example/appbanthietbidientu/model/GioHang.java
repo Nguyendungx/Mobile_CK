@@ -15,6 +15,10 @@ public class GioHang {
         this.soluongsp = soluongsp;
     }
 
+    public GioHang() {
+
+    }
+
     public int getIdsp() {
         return idsp;
     }
@@ -54,4 +58,16 @@ public class GioHang {
     public void setSoluongsp(int soluongsp) {
         this.soluongsp = soluongsp;
     }
+
+    @Override
+    public String toString() {
+        return "GioHang{" +
+                "idsp=" + idsp +
+                ", tensp='" + tensp + '\'' +
+                ", giasp=" + giasp +
+                ", soluongsp=" + soluongsp +
+                ", hinhsp='" + hinhsp + '\'' +
+                '}';
+    }
+
 }
