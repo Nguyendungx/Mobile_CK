@@ -3,8 +3,10 @@ package com.example.appbanthietbidientu.Activity;
 import android.annotation.SuppressLint;
 import android.app.SearchManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -96,6 +98,9 @@ public class QuanLyDonHangActivity extends BaseFunctionActivity {
     }
 
     private void getData() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String role = sharedPreferences.getString("role", "");
+
         // Khởi tạo FirebaseApp (chỉ cần thực hiện một lần trong ứng dụng)
 
         // Tham chiếu đến nút trong cơ sở dữ liệu Firebase Realtime
@@ -116,68 +121,71 @@ public class QuanLyDonHangActivity extends BaseFunctionActivity {
                     String trangthai = donHangData.get("trangthai").toString();
                     String user = donHangData.get("user").toString();
 
-                    // Khởi tạo đối tượng DonHang
-                    DonHang donHang = new DonHang();
-                    donHang.setId(snapshot.getKey());
-                    donHang.setTotal(total);
-                    donHang.setUser(user);
-                    donHang.setTrangThai(trangthai);
-                    donHang.setThoiGian(Long.parseLong(thoigian));
+                    // If the user's role is admin (role = 1) or the email matches, add the order
+                    if (role.equals("1") || (role.equals("2") && user.equals(sharedPreferences.getString("email", "")))) {
+                        // Khởi tạo đối tượng DonHang
+                        DonHang donHang = new DonHang();
+                        donHang.setId(snapshot.getKey());
+                        donHang.setTotal(total);
+                        donHang.setUser(user);
+                        donHang.setTrangThai(trangthai);
+                        donHang.setThoiGian(Long.parseLong(thoigian));
 
-                    // Hiển thị thông tin đơn hàng
-                    Log.d("Firebase Data", "Don Hang ID: " + snapshot.getKey());
+                        // Hiển thị thông tin đơn hàng
+                        Log.d("Firebase Data", "Don Hang ID: " + snapshot.getKey());
 
-                    // Lấy danh sách sản phẩm của đơn hàng
-                    DatabaseReference dssanphamRef = FirebaseDatabase.getInstance().getReference("donhang").child(snapshot.getKey()).child("dssanpham");
-                    dssanphamRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            ArrayList<GioHang> gioHangList = new ArrayList<>();
+                        // Lấy danh sách sản phẩm của đơn hàng
+                        DatabaseReference dssanphamRef = FirebaseDatabase.getInstance().getReference("donhang").child(snapshot.getKey()).child("dssanpham");
+                        dssanphamRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                ArrayList<GioHang> gioHangList = new ArrayList<>();
 
-                            for (DataSnapshot gioHangSnapshot : dataSnapshot.getChildren()) {
-                                // Lấy thông tin của mỗi sản phẩm từ dataSnapshot
-                                String tenSP = gioHangSnapshot.child("tensp").getValue(String.class);
-                                int giaSP = gioHangSnapshot.child("giasp").getValue(Integer.class);
-                                int soLuong = gioHangSnapshot.child("soluongsp").getValue(Integer.class);
-                                String hinhSP = gioHangSnapshot.child("hinhsp").getValue(String.class);
-                                int idSP = gioHangSnapshot.child("idsp").getValue(Integer.class);
+                                for (DataSnapshot gioHangSnapshot : dataSnapshot.getChildren()) {
+                                    // Lấy thông tin của mỗi sản phẩm từ dataSnapshot
+                                    String tenSP = gioHangSnapshot.child("tensp").getValue(String.class);
+                                    int giaSP = gioHangSnapshot.child("giasp").getValue(Integer.class);
+                                    int soLuong = gioHangSnapshot.child("soluongsp").getValue(Integer.class);
+                                    String hinhSP = gioHangSnapshot.child("hinhsp").getValue(String.class);
+                                    int idSP = gioHangSnapshot.child("idsp").getValue(Integer.class);
 
-                                // Tạo đối tượng GioHang từ thông tin sản phẩm
-                                GioHang gioHang = new GioHang();
-                                gioHang.setIdsp(idSP);
-                                gioHang.setTensp(tenSP);
-                                gioHang.setGiasp(giaSP);
-                                gioHang.setSoluongsp(soLuong);
-                                gioHang.setHinhsp(hinhSP);
+                                    // Tạo đối tượng GioHang từ thông tin sản phẩm
+                                    GioHang gioHang = new GioHang();
+                                    gioHang.setIdsp(idSP);
+                                    gioHang.setTensp(tenSP);
+                                    gioHang.setGiasp(giaSP);
+                                    gioHang.setSoluongsp(soLuong);
+                                    gioHang.setHinhsp(hinhSP);
 
-                                // Thêm sản phẩm vào danh sách gioHangList
-                                gioHangList.add(gioHang);
+                                    // Thêm sản phẩm vào danh sách gioHangList
+                                    gioHangList.add(gioHang);
+                                }
+
+                                // Gán danh sách sản phẩm vào đơn hàng
+                                donHang.setDanhSachSanPham(gioHangList);
+
+                                // Hiển thị danh sách sản phẩm của đơn hàng
+                                Log.d("Firebase Data", "Gio Hang: " + gioHangList);
+
+                                // Thêm đơn hàng vào danh sách donHangArrayList
+                                donHangArrayList.add(donHang);
+
+                                // Chuyển đổi thành chuỗi JSON
+                                String json = new Gson().toJson(donHangData);
+
+                                // Log ra thông tin của đơn hàng
+                                Log.d("Firebase Data", "DonHang: " + donHangArrayList);
+                                DonhangmoiAdapter donhangmoiAdapter=new DonhangmoiAdapter(donHangArrayList, getApplicationContext());
+                                donHangAdapter = new DonHangAdapter(new ArrayList<>(donHangArrayList), getApplicationContext());
+                                listViewDonHang.setAdapter(donHangAdapter);
                             }
 
-                            // Gán danh sách sản phẩm vào đơn hàng
-                            donHang.setDanhSachSanPham(gioHangList);
-
-                            // Hiển thị danh sách sản phẩm của đơn hàng
-                            Log.d("Firebase Data", "Gio Hang: " + gioHangList);
-
-                            // Thêm đơn hàng vào danh sách donHangArrayList
-                            donHangArrayList.add(donHang);
-
-                            // Chuyển đổi thành chuỗi JSON
-                            String json = new Gson().toJson(donHangData);
-
-                            // Log ra thông tin của đơn hàng
-                            Log.d("Firebase Data", "DonHang: " + donHangArrayList);
-                            DonhangmoiAdapter donhangmoiAdapter=new DonhangmoiAdapter(donHangArrayList, getApplicationContext());
-                            donHangAdapter = new DonHangAdapter(new ArrayList<>(donHangArrayList), getApplicationContext());
-                            listViewDonHang.setAdapter(donHangAdapter);
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-                            // Xử lý khi có lỗi xảy ra
-                        }
-                    });
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                // Xử lý khi có lỗi xảy ra
+                            }
+                        });
+                    }
                 }
             }
 
@@ -188,6 +196,7 @@ public class QuanLyDonHangActivity extends BaseFunctionActivity {
             }
         });
     }
+
 
 
 

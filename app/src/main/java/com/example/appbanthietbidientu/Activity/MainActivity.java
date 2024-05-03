@@ -139,11 +139,9 @@ public class MainActivity extends AppCompatActivity{
                         startActivity(live);
                         break;
                     case 6:
-                        // Chỉ role == 1 mới được truy cập mục này
-                        if ("1".equals(role)) {
+
                             Intent quanlydonhang = new Intent(MainActivity.this, QuanLyDonHangActivity.class);
                             startActivity(quanlydonhang);
-                        }
                         break;
                 }
             }
@@ -247,6 +245,9 @@ public class MainActivity extends AppCompatActivity{
         String role = sharedPreferences.getString("role", "");
         if("1".equals(role)){
             loaispArrayList.add(6,new Loaisp(0,"Quản lý đơn hàng",R.drawable.ic_action_infor));
+        }
+        if("2".equals(role)){
+            loaispArrayList.add(6,new Loaisp(0,"Đơn hàng của tôi",R.drawable.ic_action_infor));
         }
 
 
