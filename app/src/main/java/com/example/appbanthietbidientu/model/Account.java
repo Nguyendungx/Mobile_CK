@@ -3,12 +3,13 @@ package com.example.appbanthietbidientu.model;
 public class Account {
 
     String email;
-    String uid;
+    String userid;
+
     int role; // role 1 = admin , role 2 = user
 
-    public Account(String email, String uid, int role) {
+    public Account(String email, String userid, int role) {
         this.email = email;
-        this.uid = uid;
+        this.userid = userid;
         this.role = role;
     }
 
@@ -17,7 +18,7 @@ public class Account {
     }
 
     public String getUid() {
-        return uid;
+        return userid;
     }
 
     public int getRole() {
@@ -28,8 +29,8 @@ public class Account {
         this.email = email;
     }
 
-    public void setUid(String uid) {
-        this.uid = uid;
+    public void setUid(String userid) {
+        this.userid = userid;
     }
 
     public void setRole(int role) {
