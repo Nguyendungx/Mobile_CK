@@ -178,6 +178,8 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     }
     private void getCommentsForProduct() {
         // Gửi yêu cầu để lấy danh sách comment từ API
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String email = sharedPreferences.getString("email", "");
         ApiSp.apiDevice.getlistComment().enqueue(new Callback<List<Comment>>() {
             @Override
             public void onResponse(Call<List<Comment>> call, Response<List<Comment>> response) {
@@ -191,7 +193,9 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
                         }
                     }
                     // Xử lý danh sách comment ở đây
-                    displayComments(filteredComments);
+// Xử lý danh sách comment ở đây
+                    displayComments(filteredComments, email);
+
                 } else {
                     // Xử lý nếu có lỗi khi nhận phản hồi từ server
                     Log.e("API Call", "Failed to get comments: " + response.message());
@@ -206,20 +210,18 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         });
     }
 
-    private void displayComments(List<Comment> comments) {
+    private void displayComments(List<Comment> comments, String userEmail) {
         recyclerViewComments.setLayoutManager(new LinearLayoutManager(this));
-        commentAdapter = new CommentAdapter(comments);
+        commentAdapter = new CommentAdapter(comments, userEmail);
         recyclerViewComments.setAdapter(commentAdapter);
 
         // Thiết lập CommentDeleteListener cho CommentAdapter
-        commentAdapter.setCommentDeleteListener(new CommentAdapter.CommentDeleteListener() {
-            @Override
-            public void onCommentDelete(String commentId) {
-                // Xử lý khi người dùng click vào button xóa comment
-                deleteComment(commentId);
-            }
+        commentAdapter.setCommentDeleteListener(commentId -> {
+            // Xử lý khi người dùng click vào button xóa comment
+            deleteComment(commentId);
         });
     }
+
     private void postComment() {
         sanpham.getId();
         // Lấy nội dung của comment từ EditText

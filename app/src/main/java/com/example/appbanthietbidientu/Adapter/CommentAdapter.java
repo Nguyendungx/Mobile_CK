@@ -1,6 +1,8 @@
 package com.example.appbanthietbidientu.Adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,10 +24,13 @@ import java.util.List;
 import java.util.Locale;
 
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentViewHolder> {
-    private static List<Comment> comments;
+    private List<Comment> comments;
+    private String userUsername; // Username retrieved from SharedPreferences
+    private CommentDeleteListener commentDeleteListener; // Non-static listener
 
-    public CommentAdapter(List<Comment> comments) {
+    public CommentAdapter(List<Comment> comments, String userUsername) {
         this.comments = comments;
+        this.userUsername = userUsername;
     }
 
     @NonNull
@@ -45,6 +50,28 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
         String formattedDate = sdf.format(new Date(comment.getTimestamp()));
         holder.textViewTimestamp.setText(formattedDate);
 
+        // Check if the user has admin privileges (role = 1) or if the current comment's username matches the user's username
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(holder.itemView.getContext());
+        String role = sharedPreferences.getString("role", "");
+        if (role.equals("1") || comment.getUserId().equals(userUsername)) {
+            holder.buttonDelete.setVisibility(View.VISIBLE);
+        } else {
+            holder.buttonDelete.setVisibility(View.GONE);
+        }
+
+        // Set onClickListener for the delete button
+        holder.buttonDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (commentDeleteListener != null) {
+                    int position = holder.getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        String commentId = String.valueOf(comments.get(position).getIdCmt());
+                        commentDeleteListener.onCommentDelete(commentId);
+                    }
+                }
+            }
+        });
     }
 
     @Override
@@ -52,11 +79,10 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
         return comments.size();
     }
 
-    public static class CommentViewHolder extends RecyclerView.ViewHolder {
+    public class CommentViewHolder extends RecyclerView.ViewHolder {
         TextView textViewUserId;
         TextView textViewCommentText;
         TextView textViewTimestamp;
-
         ImageView buttonDelete;
 
         public CommentViewHolder(@NonNull View itemView) {
@@ -72,23 +98,20 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
                     if (commentDeleteListener != null) {
                         int position = getAdapterPosition();
                         if (position != RecyclerView.NO_POSITION) {
-                            int commentId = (int) comments.get(position).getIdCmt();
-                            commentDeleteListener.onCommentDelete(String.valueOf(commentId));
+                            String commentId = String.valueOf(comments.get(position).getIdCmt());
+                            commentDeleteListener.onCommentDelete(commentId);
                         }
                     }
                 }
             });
         }
-
     }
+
     public interface CommentDeleteListener {
         void onCommentDelete(String commentId);
     }
-    private static CommentDeleteListener commentDeleteListener;
 
     public void setCommentDeleteListener(CommentDeleteListener listener) {
         this.commentDeleteListener = listener;
     }
-
-
 }
