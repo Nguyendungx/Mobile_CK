@@ -143,6 +143,11 @@ public class MainActivity extends AppCompatActivity{
                             Intent quanlydonhang = new Intent(MainActivity.this, QuanLyDonHangActivity.class);
                             startActivity(quanlydonhang);
                         break;
+                    case 7:
+
+                        Intent quanlysanpham = new Intent(MainActivity.this, AdminSanPhamActivity.class);
+                        startActivity(quanlysanpham);
+                        break;
                 }
             }
         });
@@ -248,6 +253,9 @@ public class MainActivity extends AppCompatActivity{
         }
         if("2".equals(role)){
             loaispArrayList.add(6,new Loaisp(0,"Đơn hàng của tôi",R.drawable.ic_action_infor));
+        }
+        if("1".equals(role)){
+            loaispArrayList.add(7,new Loaisp(0,"Quản lý sản phẩm",R.drawable.ic_action_infor));
         }
 
 
