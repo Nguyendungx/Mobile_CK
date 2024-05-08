@@ -250,12 +250,10 @@ public class MainActivity extends AppCompatActivity{
         String role = sharedPreferences.getString("role", "");
         if("1".equals(role)){
             loaispArrayList.add(6,new Loaisp(0,"Quản lý đơn hàng",R.drawable.ic_action_infor));
+            loaispArrayList.add(7,new Loaisp(0,"Quản lý sản phẩm",R.drawable.ic_action_infor));
         }
         if("2".equals(role)){
             loaispArrayList.add(6,new Loaisp(0,"Đơn hàng của tôi",R.drawable.ic_action_infor));
-        }
-        if("1".equals(role)){
-            loaispArrayList.add(7,new Loaisp(0,"Quản lý sản phẩm",R.drawable.ic_action_infor));
         }
 
 

@@ -14,9 +14,11 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.appbanthietbidientu.R;
@@ -25,8 +27,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -37,7 +42,8 @@ import java.util.Calendar;
 public class AdminUploadActivity extends AppCompatActivity {
     ImageView uploadImage;
     Button saveButton;
-    EditText uploadName, uploadPrice, uploadDesc, uploadId, uploadSanPhamID;
+    EditText uploadName, uploadPrice, uploadDesc;
+    Spinner uploadSanPhamID;
     String imageURL;
     Uri uri;
     @Override
@@ -49,9 +55,21 @@ public class AdminUploadActivity extends AppCompatActivity {
         uploadDesc = findViewById(R.id.uploadDesc);
         uploadName = findViewById(R.id.uploadTopic);
         uploadPrice = findViewById(R.id.uploadPrice);
+//        uploadSanPhamID = findViewById(R.id.uploadSanPhamID);
         uploadSanPhamID = findViewById(R.id.uploadSanPhamID);
-        uploadId = findViewById(R.id.uploadID);
         saveButton = findViewById(R.id.saveButton);
+
+        // Đẩy data vào spinner
+        // Create an ArrayAdapter using the string array and a default spinner layout.
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                this,
+                R.array.item_id,
+                android.R.layout.simple_spinner_item
+        );
+        // Specify the layout to use when the list of choices appears.
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner.
+        uploadSanPhamID.setAdapter(adapter);
 
         ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -112,29 +130,45 @@ public class AdminUploadActivity extends AppCompatActivity {
         });
     }
     public void uploadData(){
-        String title = uploadName.getText().toString();
-        String desc = uploadDesc.getText().toString();
-        int price = Integer.parseInt(uploadPrice.getText().toString());
-        int id = Integer.parseInt(uploadId.getText().toString());
-        int idsp = Integer.parseInt(uploadSanPhamID.getText().toString());
-        Sanphammoi sanphammoi = new Sanphammoi(id, title, price, imageURL,desc, idsp);
         //We are changing the child from title to currentDate,
         // because we will be updating title as well and it may affect child value.
         String currentDate = DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
-        FirebaseDatabase.getInstance().getReference("sanphammoinhat").child(title)
-                .setValue(sanphammoi).addOnCompleteListener(new OnCompleteListener<Void>() {
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child("sanphammoinhat");
+        dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()){
-                            Toast.makeText(AdminUploadActivity.this, "Saved", Toast.LENGTH_SHORT).show();
-                            finish();
-                        }
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        long spCount = snapshot.getChildrenCount();
+                        String childName = String.valueOf(spCount);
+
+                        String title = uploadName.getText().toString();
+                        String desc = uploadDesc.getText().toString();
+                        int price = Integer.parseInt(uploadPrice.getText().toString());
+                        int idsp = Integer.parseInt(uploadSanPhamID.getSelectedItem().toString());
+                        int id= Integer.parseInt(String.valueOf(spCount + 1));
+                        Sanphammoi sanphammoi = new Sanphammoi(id, title, price, imageURL,desc, idsp);
+
+                        dbRef.child(childName)
+                                .setValue(sanphammoi).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()){
+                                            Toast.makeText(AdminUploadActivity.this, "Saved", Toast.LENGTH_SHORT).show();
+                                            finish();
+                                        }
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(AdminUploadActivity.this, e.getMessage().toString(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
                     }
-                }).addOnFailureListener(new OnFailureListener() {
+
                     @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(AdminUploadActivity.this, e.getMessage().toString(), Toast.LENGTH_SHORT).show();
+                    public void onCancelled(@NonNull DatabaseError error) {
+
                     }
                 });
+
     }
 }
