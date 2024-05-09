@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Activity.AdminUploadActivity">
+    tools:context=".Activity.AdminUpdateActivity">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -27,7 +27,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Thêm dữ liệu"
+                android:text="Cập nhật dữ liệu"
                 android:textSize="30sp"
                 android:textAlignment="center"/>
 
@@ -35,35 +35,35 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:src="@drawable/imageicon"
-                android:id="@+id/uploadImage"
+                android:id="@+id/updateImage"
                 android:layout_marginTop="10dp"
                 android:scaleType="fitXY"/>
 
             <!-- EditText nhập ID -->
-            <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:id="@+id/uploadSanPhamID"
-                android:layout_marginTop="20dp"
-                android:padding="16dp"
-                android:hint="Nhập ID"
-                tools:listitem=""
-                android:gravity="start|center_vertical"
-                style="@style/button1"/>
-            <!-- EditText nhập ID sản phẩm -->
-<!--            <EditText-->
+<!--            <Spinner-->
 <!--                android:layout_width="match_parent"-->
 <!--                android:layout_height="60dp"-->
 <!--                android:id="@+id/uploadSanPhamID"-->
 <!--                android:layout_marginTop="20dp"-->
 <!--                android:padding="16dp"-->
-<!--                android:hint="Nhập ID sản phẩm"-->
+<!--                android:hint="Nhập ID"-->
+<!--                tools:listitem=""-->
 <!--                android:gravity="start|center_vertical"-->
 <!--                style="@style/button1"/>-->
+            <!-- EditText nhập ID sản phẩm -->
+            <!--            <EditText-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="60dp"-->
+            <!--                android:id="@+id/uploadSanPhamID"-->
+            <!--                android:layout_marginTop="20dp"-->
+            <!--                android:padding="16dp"-->
+            <!--                android:hint="Nhập ID sản phẩm"-->
+            <!--                android:gravity="start|center_vertical"-->
+            <!--                style="@style/button1"/>-->
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:id="@+id/uploadName"
+                android:id="@+id/updateTopic"
                 android:layout_marginTop="20dp"
                 android:padding="16dp"
                 android:hint="Nhập tên"
@@ -73,7 +73,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:id="@+id/uploadPrice"
+                android:id="@+id/updatePrice"
                 android:inputType = "number"
                 android:layout_marginTop="20dp"
                 android:padding="16dp"
@@ -84,7 +84,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:id="@+id/uploadDesc"
+                android:id="@+id/updateDesc"
                 android:layout_marginTop="20dp"
                 android:padding="16dp"
                 android:hint="Nhập mô tả"
@@ -95,7 +95,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:text="Lưu"
-                android:id="@+id/saveButton"
+                android:id="@+id/updateButton"
                 android:textSize="18sp"
                 android:layout_marginTop="20dp"
                 app:cornerRadius = "20dp"

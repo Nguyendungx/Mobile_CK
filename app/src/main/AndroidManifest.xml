@@ -28,6 +28,7 @@
         android:allowClearUserData="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -35,6 +36,9 @@
         android:theme="@style/Theme.AppBanThietBiDienTu"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".Activity.AdminUpdateActivity"
+            android:exported="false" />
         <activity
             android:name=".Activity.AdminDetailActivity"
             android:exported="false" />

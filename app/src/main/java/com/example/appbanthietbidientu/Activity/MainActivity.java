@@ -249,11 +249,11 @@ public class MainActivity extends AppCompatActivity{
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         String role = sharedPreferences.getString("role", "");
         if("1".equals(role)){
-            loaispArrayList.add(6,new Loaisp(0,"Quản lý đơn hàng",R.drawable.ic_action_infor));
-            loaispArrayList.add(7,new Loaisp(0,"Quản lý sản phẩm",R.drawable.ic_action_infor));
+            loaispArrayList.add(6,new Loaisp(0,"Quản lý đơn hàng", R.drawable.baseline_chrome_reader_mode_24));
+            loaispArrayList.add(7,new Loaisp(0,"Quản lý sản phẩm", R.drawable.baseline_backpack_24));
         }
         if("2".equals(role)){
-            loaispArrayList.add(6,new Loaisp(0,"Đơn hàng của tôi",R.drawable.ic_action_infor));
+            loaispArrayList.add(6,new Loaisp(0,"Đơn hàng của tôi", R.drawable.baseline_chrome_reader_mode_24));
         }
 
 

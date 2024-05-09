@@ -17,6 +17,9 @@ public class Sanphammoi {
         this.idsanpham = idsanpham;
     }
 
+    public Sanphammoi() {
+    }
+
     public int getId() {
         return id;
     }

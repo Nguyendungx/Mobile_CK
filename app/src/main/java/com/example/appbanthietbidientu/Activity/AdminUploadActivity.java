@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -38,6 +39,8 @@ import com.google.firebase.storage.UploadTask;
 
 import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AdminUploadActivity extends AppCompatActivity {
     ImageView uploadImage;
@@ -46,6 +49,7 @@ public class AdminUploadActivity extends AppCompatActivity {
     Spinner uploadSanPhamID;
     String imageURL;
     Uri uri;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,10 +57,10 @@ public class AdminUploadActivity extends AppCompatActivity {
 
         uploadImage = findViewById(R.id.uploadImage);
         uploadDesc = findViewById(R.id.uploadDesc);
-        uploadName = findViewById(R.id.uploadTopic);
+        uploadName = findViewById(R.id.uploadName);
         uploadPrice = findViewById(R.id.uploadPrice);
-//        uploadSanPhamID = findViewById(R.id.uploadSanPhamID);
         uploadSanPhamID = findViewById(R.id.uploadSanPhamID);
+//        uploadSanPhamID = findViewById(R.id.uploadSanPhamID);
         saveButton = findViewById(R.id.saveButton);
 
         // Đẩy data vào spinner
@@ -76,7 +80,7 @@ public class AdminUploadActivity extends AppCompatActivity {
                 new ActivityResultCallback<ActivityResult>() {
                     @Override
                     public void onActivityResult(ActivityResult result) {
-                        if (result.getResultCode() == Activity.RESULT_OK){
+                        if (result.getResultCode() == Activity.RESULT_OK) {
                             Intent data = result.getData();
                             uri = data.getData();
                             uploadImage.setImageURI(uri);
@@ -102,7 +106,8 @@ public class AdminUploadActivity extends AppCompatActivity {
             }
         });
     }
-    public void saveData(){
+
+    public void saveData() {
         StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("images")
                 .child(uri.getLastPathSegment());
 
@@ -116,7 +121,7 @@ public class AdminUploadActivity extends AppCompatActivity {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                while (!uriTask.isComplete());
+                while (!uriTask.isComplete()) ;
                 Uri urlImage = uriTask.getResult();
                 imageURL = urlImage.toString();
                 uploadData();
@@ -129,46 +134,61 @@ public class AdminUploadActivity extends AppCompatActivity {
             }
         });
     }
-    public void uploadData(){
+
+    public void uploadData() {
         //We are changing the child from title to currentDate,
         // because we will be updating title as well and it may affect child value.
         String currentDate = DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child("sanphammoinhat");
         dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        long spCount = snapshot.getChildrenCount();
-                        String childName = String.valueOf(spCount);
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                long spCount = snapshot.getChildrenCount();
+                String childName = String.valueOf(spCount);
 
-                        String title = uploadName.getText().toString();
-                        String desc = uploadDesc.getText().toString();
-                        int price = Integer.parseInt(uploadPrice.getText().toString());
-                        int idsp = Integer.parseInt(uploadSanPhamID.getSelectedItem().toString());
-                        int id= Integer.parseInt(String.valueOf(spCount + 1));
-                        Sanphammoi sanphammoi = new Sanphammoi(id, title, price, imageURL,desc, idsp);
+//                        String title = uploadName.getText().toString();
+//                        String desc = uploadDesc.getText().toString();
+//                        int price = Integer.parseInt(uploadPrice.getText().toString());
+//                        int idsp = Integer.parseInt(uploadSanPhamID.getSelectedItem().toString());
+//                        int id= Integer.parseInt(String.valueOf(spCount + 1));
+//                        Sanphammoi sanphammoi = new Sanphammoi(id, title, price, imageURL,desc, idsp);
 
-                        dbRef.child(childName)
-                                .setValue(sanphammoi).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isSuccessful()){
-                                            Toast.makeText(AdminUploadActivity.this, "Saved", Toast.LENGTH_SHORT).show();
-                                            finish();
-                                        }
-                                    }
-                                }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(AdminUploadActivity.this, e.getMessage().toString(), Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                String title = uploadName.getText().toString();
+                String desc = uploadDesc.getText().toString();
+                String price = uploadPrice.getText().toString();
+                String idsp = uploadSanPhamID.getSelectedItem().toString();
+                String id = String.valueOf(spCount + 1);
 
-                    }
-                });
+                Map<String, String> sanphammoiMap = new HashMap<>();
+                sanphammoiMap.put("id", id);
+                sanphammoiMap.put("tensanpham", title);
+                sanphammoiMap.put("giasanpham", price);
+                sanphammoiMap.put("hinhanhsanpham", imageURL); // Nếu imageURL là một URL hình ảnh
+                sanphammoiMap.put("motasanpham", desc);
+                sanphammoiMap.put("idsanpham", idsp);
+                dbRef.child(childName)
+                        .setValue(sanphammoiMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(AdminUploadActivity.this, "Saved", Toast.LENGTH_SHORT).show();
+                                    finish();
+                                }
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(AdminUploadActivity.this, e.getMessage().toString(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
     }
 }
