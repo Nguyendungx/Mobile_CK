@@ -4,11 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -46,12 +48,13 @@ public class AdminSanPhamActivity extends AppCompatActivity {
     List<Sanpham> dataList;
     AdminSanphammoiAdapter adapter;
     SearchView searchView;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_san_pham);
-
+        toolbar =findViewById(R.id.ToolbarDanhSachSP);
         fab = findViewById(R.id.fab);
         loadsp();
         fab.setOnClickListener(new View.OnClickListener() {
@@ -59,6 +62,23 @@ public class AdminSanPhamActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(AdminSanPhamActivity.this, AdminUploadActivity.class);
                 startActivity(intent);
+            }
+        });
+        ActionBar();
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu,menu);
+        return true;
+    }
+    private void ActionBar() {
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationIcon(R   .drawable.ic_action_back);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
     }

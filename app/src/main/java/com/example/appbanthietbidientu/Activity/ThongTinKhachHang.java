@@ -371,10 +371,11 @@ public class ThongTinKhachHang extends AppCompatActivity {
 
                 // Tạo một key tự động cho đơn hàng mới
                 String newOrderKey = String.valueOf(orderCount);
-
+                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                String email = sharedPreferences.getString("email", "");
                 // Tạo dữ liệu cho đơn hàng mới
                 Map<String, Object> orderData = new HashMap<>();
-                orderData.put("user", "5");
+                orderData.put("user", email);
                 orderData.put("total", amountVND);
                 orderData.put("name", name);
                 orderData.put("sdt", sdt);

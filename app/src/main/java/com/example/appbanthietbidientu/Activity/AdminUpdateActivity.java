@@ -96,8 +96,6 @@ public class AdminUpdateActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 saveData();
-                Intent intent = new Intent(AdminUpdateActivity.this, MainActivity.class);
-                startActivity(intent);
             }
         });
     }
@@ -116,6 +114,10 @@ public class AdminUpdateActivity extends AppCompatActivity {
                 while (!uriTask.isComplete());
                 Uri urlImage = uriTask.getResult();
                 imageUrl = urlImage.toString();
+                if(imageUrl==oldImageURL)
+                {
+                    imageUrl=oldImageURL;
+                }
                 updateData();
                 dialog.dismiss();
             }

@@ -61,7 +61,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tên khách hàng"
+            android:text="Nhập số điện thoại"
             style="@style/textviewblack"/>
         <EditText
             android:id="@+id/SoDienThoai"
@@ -73,13 +73,13 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tên khách hàng"
+            android:text="Địa chỉ"
             style="@style/textviewblack"/>
         <EditText
             android:id="@+id/EmailKhachHang"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nhập email"
+            android:hint="Nhập địa chỉ"
             style="@style/text"
             android:inputType="text"/>
 
