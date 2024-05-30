@@ -12,7 +12,7 @@
         android:textStyle="bold"
         android:textSize="16sp"
         android:text="UserName"
-        android:textColor="@android:color/black"
+        android:textColor="@color/gray_text"
         android:layout_marginBottom="4dp"/>
 
     <TextView
@@ -29,15 +29,14 @@
         android:layout_height="54dp"
         android:layout_marginBottom="8dp"
         android:text="Comment 1"
-        android:textColor="@android:color/black"
+        android:textColor="@color/gray_text"
         android:textSize="14sp" />
 
     <ImageView
         android:id="@+id/btn_Delete"
-        android:layout_width="56dp"
-        android:layout_height="38dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_gravity="end"
-        android:layout_marginStart="8dp"
         android:clickable="true"
         android:focusable="true"
         android:src="@drawable/ic_delete" />

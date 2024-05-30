@@ -2,9 +2,11 @@ package com.example.appbanthietbidientu.Activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -262,10 +264,12 @@ public class ThongTinKhachHang extends AppCompatActivity {
 
                                             // Tạo một key tự động cho đơn hàng mới
                                             String newOrderKey = String.valueOf(orderCount);
+                                            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                                            String email = sharedPreferences.getString("email", "");
 
                                             // Tạo dữ liệu cho đơn hàng mới
                                             Map<String, Object> orderData = new HashMap<>();
-                                            orderData.put("user", "5");
+                                            orderData.put("user", email);
                                             orderData.put("total", amountVND);
                                             orderData.put("name",name);
                                             orderData.put("sdt",sdt);
@@ -367,10 +371,11 @@ public class ThongTinKhachHang extends AppCompatActivity {
 
                 // Tạo một key tự động cho đơn hàng mới
                 String newOrderKey = String.valueOf(orderCount);
-
+                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                String email = sharedPreferences.getString("email", "");
                 // Tạo dữ liệu cho đơn hàng mới
                 Map<String, Object> orderData = new HashMap<>();
-                orderData.put("user", "5");
+                orderData.put("user", email);
                 orderData.put("total", amountVND);
                 orderData.put("name", name);
                 orderData.put("sdt", sdt);

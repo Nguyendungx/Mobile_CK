@@ -1,7 +1,9 @@
 package com.example.appbanthietbidientu.Activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -52,6 +54,7 @@ public class ChiTietDonHangActivity extends AppCompatActivity {
     DatabaseReference donHangRef;
     // Khai báo trangThaiList ở mức lớp
     List<String> trangThaiList = new ArrayList<>();
+     boolean isSpinnerEnabled = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +71,10 @@ public class ChiTietDonHangActivity extends AppCompatActivity {
         return true;
     }
 
+
+
     private void Khaibao() {
+        // Khởi tạo các thành phần giao diện và thiết lập sự kiện
         toolbarChiTietDonHang = findViewById(R.id.ToolbarChiTietDonHang);
         textThongTinKhachHang = findViewById(R.id.TextThongTinKhachHang);
         textTenKhachHang = findViewById(R.id.TextTenKhachHang);
@@ -78,9 +84,13 @@ public class ChiTietDonHangActivity extends AppCompatActivity {
         recyclerViewDonHangChiTiet = findViewById(R.id.recyclerViewDonHangChiTiet);
         spinnerTrangThai = findViewById(R.id.spinnerTrangThai);
         buttonXacNhan = findViewById(R.id.buttonXacNhan);
+
         // Khởi tạo đối tượng DatabaseReference
         donHangRef = FirebaseDatabase.getInstance().getReference("donhang");
 
+        // Lấy role từ SharedPreferences
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String role = sharedPreferences.getString("role", "");
 
         // Khởi tạo Spinner với danh sách trạng thái đơn hàng
         trangThaiList.add("Đang xử lý");
@@ -90,18 +100,41 @@ public class ChiTietDonHangActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerTrangThai.setAdapter(adapter);
 
+        // Disable spinner if role == 2
+        if ("2".equals(role)) {
+            spinnerTrangThai.setFocusable(false);
+            spinnerTrangThai.setClickable(false);
+            spinnerTrangThai.setEnabled(false);
+            isSpinnerEnabled = false;
+        }
+
+        // Set onClickListener for the "Xác nhận" button
         buttonXacNhan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onClickXacNhan();
             }
         });
+
+        // Check role to disable the button if role == 2
+        if (role.equals("2")) {
+            buttonXacNhan.setVisibility(View.GONE);
+        }
     }
+
+
 
     // Phương thức xử lý sự kiện khi nút xác nhận được click
     private void onClickXacNhan() {
         // Lấy trạng thái đơn hàng từ Spinner
         String trangThai = spinnerTrangThai.getSelectedItem().toString();
+
+        // Nếu Spinner đã được vô hiệu hóa, không thực hiện thay đổi trạng thái
+        if (!isSpinnerEnabled) {
+            // Hiển thị thông báo hoặc thực hiện hành động tùy thuộc vào yêu cầu của bạn
+            Toast.makeText(ChiTietDonHangActivity.this, "Bạn không thể thay đổi trạng thái khi role là 2", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         // Lấy id đơn hàng từ Intent
         String idDonHang = getIntent().getStringExtra("idDonHang");
@@ -114,11 +147,9 @@ public class ChiTietDonHangActivity extends AppCompatActivity {
                     public void onSuccess(Void aVoid) {
                         // Trong ChiTietDonHangActivity
                         Intent resultIntent = new Intent();
-                        setResult(RESULT_OK, resultIntent);
-                        finish();
 
                         // Xử lý khi cập nhật thành công
-                            Toast.makeText(ChiTietDonHangActivity.this, "Cập nhật trạng thái đơn hàng thành công", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ChiTietDonHangActivity.this, "Cập nhật trạng thái đơn hàng thành công", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -130,6 +161,7 @@ public class ChiTietDonHangActivity extends AppCompatActivity {
                     }
                 });
     }
+
     private void ActionBar() {
         setSupportActionBar(toolbarChiTietDonHang);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

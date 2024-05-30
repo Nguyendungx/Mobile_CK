@@ -27,7 +27,7 @@
             android:id="@+id/textviewloaisp"
             android:layout_margin="5dp"
             android:textSize="18dp"
-            android:textColor="@color/black"
+            android:textColor="@color/gray_text"
             android:text="Loại sản phẩm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>

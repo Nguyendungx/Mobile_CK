@@ -39,7 +39,7 @@ public class GioHangRecyclerViewAdapter extends RecyclerView.Adapter<GioHangView
         holder.textProductName.setText(gioHang.getTensp());
         holder.textQuantity.setText("Qt: " + gioHang.getSoluongsp());
         holder.textPrice.setText("Price: $" + gioHang.getGiasp());
-        holder.textTotalPrice.setText("Total Price: $" + gioHang.getGiasp() * gioHang.getSoluongsp());
+        holder.textTotalPrice.setText("Total: $" + gioHang.getGiasp() * gioHang.getSoluongsp());
 
         // Load hình ảnh bằng Picasso hoặc Glide (tùy bạn)
         Picasso.get().load(gioHang.getHinhsp()).into(holder.imageProduct);

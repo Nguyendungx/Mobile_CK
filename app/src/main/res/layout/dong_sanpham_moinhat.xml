@@ -41,7 +41,7 @@
                 android:layout_marginHorizontal="5dp"
                 android:gravity="center"
                 android:text="android"
-                android:textColor="#111"
+                style="@style/textviewgreen"
                 android:textSize="18dp" />
 
             <TextView
@@ -52,7 +52,7 @@
                 android:layout_gravity="center"
                 android:layout_margin="5dp"
                 android:text="17.000đ"
-                android:textColor="#ED125D"
+                android:textColor="@color/pink_bold"
                 android:textSize="16dp"
                 />
             <LinearLayout

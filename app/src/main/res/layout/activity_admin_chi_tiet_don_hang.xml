@@ -11,66 +11,64 @@
         android:id="@+id/ToolbarChiTietDonHang"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#2196F3"
         app:title="Chi Tiết Đơn Hàng"
-        app:titleTextColor="#FFFFFF" />
+        app:titleTextColor="#FFFFFF"
+        android:background="@color/green_medium"/>
 
     <TextView
         android:id="@+id/TextThongTinKhachHang"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
         android:text="Thông tin khách hàng:"
-        android:textStyle="bold"
-        android:textSize="18sp" />
+        style="@style/textviewblack" />
 
     <TextView
         android:id="@+id/TextTenKhachHang"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="Tên: -"
-        android:textSize="16sp" />
+        style="@style/text"
+        android:text="Tên: -" />
 
     <TextView
         android:id="@+id/TextTrangThaiDonHang"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
         android:text="Trạng thái đơn hàng:"
-        android:textStyle="bold"
-        android:textSize="18sp" />
+        style="@style/textviewblack"/>
 
     <Spinner
         android:id="@+id/spinnerTrangThai"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginTop="8dp"
-        android:textSize="16sp" />
+        style="@style/textviewblack" />
 
     <TextView
         android:id="@+id/TextTongTien"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
         android:text="Tổng tiền:"
-        android:textSize="18sp"
-        android:textStyle="bold"/>
+        style="@style/textviewblack"/>
 
     <TextView
         android:id="@+id/TextGiaTriTongTien"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="-"
-        android:textSize="16sp"
-        android:textStyle="bold" />
+        android:layout_marginEnd="16dp"
+        style="@style/textviewgreen"
+        android:text="-" />
 
 
     <TextView
@@ -80,24 +78,25 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="13/01/2024"
+        android:layout_marginEnd="16dp"
         android:textSize="16sp"
         android:textStyle="normal" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewDonHangChiTiet"
         android:layout_width="match_parent"
-        android:layout_height="348dp"
+        android:layout_height="300dp"
         android:layout_marginTop="16dp" />
 
     <!--Thêm nút xác nhận-->
     <Button
         android:id="@+id/buttonXacNhan"
+        style="@style/button1"
+        android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp"
-        android:text="Xác nhận"
         android:onClick="onClickXacNhan"
+        android:text="      Xác nhận      "
         tools:ignore="OnClick" /> <!--Đặt tên hàm xử lý sự kiện khi click-->
 
 </LinearLayout>

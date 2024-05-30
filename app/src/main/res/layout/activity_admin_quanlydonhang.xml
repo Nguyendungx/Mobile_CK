@@ -10,7 +10,7 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/ToolbarQuanLyDonHang"
-        android:background="#2196F3"
+        android:background="@color/green_medium"
         app:title="Quản lý đơn hàng"
         app:titleTextColor="#FFFFFF"
         android:layout_width="match_parent"

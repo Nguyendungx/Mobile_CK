@@ -17,6 +17,8 @@
             android:background="@color/green_medium"
             android:gravity="center_vertical"> <!-- Thêm thuộc tính gravity -->
 
+
+
             <!-- TextView -->
             <TextView
                 android:layout_width="wrap_content"
@@ -90,12 +92,13 @@
                 android:text="Sign Up"
                 style="@style/button1" />
 
-            <!-- Textview for link to login -->
-            <TextView
-                android:layout_width="wrap_content"
+            <!-- Button Sign Up -->
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Already have an account, log in!"
-                style="@style/textviewgreen" />
+                android:text="Sign In"
+                style="@style/button2" />
 
         </LinearLayout>
     </RelativeLayout>
